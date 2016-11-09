@@ -5,6 +5,8 @@ public class ElevatorCarPiston {
 	private int lastFloor;
 	private int destinationFloor;
 	
+	//General object for piston
+	public Object piston = new Object();
 	//Time variables for pistonMove()
 	public long begin_time = System.nanoTime();
 	public double up_time = 0;
@@ -21,7 +23,7 @@ public class ElevatorCarPiston {
 		currentFloor = 1;
 		lastFloor = 2;
 		destinationFloor = currentFloor;
-		this = object.STATIONARY;
+		piston = object.STATIONARY;
 	}
 	
 	// ElevatorCarPist(int, int)
@@ -76,7 +78,7 @@ public class ElevatorCarPiston {
 	
 	//Mutator for Piston State
 	public void setPistonState(Piston state){
-		this = object.state;
+		object = state;
 	}
 	
 	//Getter for Piston State
@@ -86,10 +88,10 @@ public class ElevatorCarPiston {
 	
 	//Calculates the position of the Piston with respect to time and speed
 	public double pistonMove(){	
-		if(this == object.MOVING_UP){
+		if(piston == object.MOVING_UP){
 			up_time = time_sec();
 			currentPosition = currentPosition + 2.0 * Math.abs((up_time - down_time));
-		}else if(this == object.MOVING_DOWN){
+		}else if(piston == object.MOVING_DOWN){
 			down_time = time_sec();
 			currentPosition = currentPosition - 2.0 * Math.abs((up_time - down_time));
 		}else{

@@ -6,14 +6,15 @@ public class ElevatorCarPiston {
 	private int destinationFloor;
 	
 	//Time variables for pistonMove()
-	public static double up_time = 0;
-	public static double down_time = 0;
+	public long begin_time = System.nanoTime();
+	public double up_time = 0;
+	public double down_time = 0;
 	//Position variable for pistonMove()
-	public static double currentPosition = 0;
+	public double currentPosition = 0;
 	
 	//Different states for piston object
-	public static enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
-	public static Piston object;
+	public enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
+	public Piston object;
 	
 	// Default Constructor
 	ElevatorCarPiston() {
@@ -74,17 +75,17 @@ public class ElevatorCarPiston {
 	}
 	
 	//Mutator for Piston State
-	public static void setPistonState(Piston state){
+	public void setPistonState(Piston state){
 		this = object.state;
 	}
 	
 	//Getter for Piston State
-	public static Piston getPistonState(){
+	public Piston getPistonState(){
 		return object;
 	}
 	
 	//Calculates the position of the Piston with respect to time and speed
-	public static double pistonMove(){	
+	public double pistonMove(){	
 		if(this == object.MOVING_UP){
 			up_time = time_sec();
 			currentPosition = currentPosition + 2.0 * Math.abs((up_time - down_time));
@@ -100,8 +101,8 @@ public class ElevatorCarPiston {
 	}
 	
 	//Converts system time to seconds
-	public static double time_sec(){
-		long elap_time = sys_time() - begin_time;
+	public double time_sec(){
+		long elap_time = System.nanoTime() - begin_time;
 		return (double)(elap_time / 1000000000);
 	}
 }

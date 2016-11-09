@@ -91,6 +91,10 @@ public class ElevatorCarPiston {
 		}else if(this == object.MOVING_DOWN){
 			down_time = time_sec();
 			currentPosition = currentPosition - 2.0 * Math.abs((up_time - down_time));
+		}else{
+			/*
+			 * May need to add functions if piston stationary state breaks calculations
+			 */
 		}
 		return currentPosition;
 	}

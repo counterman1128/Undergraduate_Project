@@ -6,8 +6,8 @@ public class ElevatorCarPiston {
 	private int destinationFloor;
 	
 	//Time variables for pistonMove()
-	public static double up_time;
-	public static double down_time;
+	public static double up_time = 0;
+	public static double down_time = 0;
 	//Position variable for pistonMove()
 	public static double currentPosition = 0;
 	

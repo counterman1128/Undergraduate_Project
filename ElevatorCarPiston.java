@@ -79,7 +79,7 @@ public class ElevatorCarPiston {
 	}
 	
 	//Getter for Piston State
-	public static Piston(){
+	public static Piston getPistonState(){
 		return object;
 	}
 	

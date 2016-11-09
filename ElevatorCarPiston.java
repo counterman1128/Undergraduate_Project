@@ -20,6 +20,7 @@ public class ElevatorCarPiston {
 		currentFloor = 1;
 		lastFloor = 2;
 		destinationFloor = currentFloor;
+		this = object.STATIONARY;
 	}
 	
 	// ElevatorCarPist(int, int)

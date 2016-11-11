@@ -1,7 +1,7 @@
 package elevatorProject;
 
 public class Door {
-	Boolean doorOpen;
+	public boolean doorOpen;
 	DoorSensor sensor;
 	// Default Constructor
 	Door() {
@@ -11,6 +11,14 @@ public class Door {
 	
 	// Accessors
 	Boolean getDoorOpen() {
+		if(sensor.getData())
+		{
+			doorOpen = false;
+		}
+		else
+		{
+			doorOpen = true;
+		}
 		return doorOpen;
 	}
 	

@@ -8,13 +8,17 @@ public class Door {
 		doorOpen = false;
 		sensor = new DoorSensor();
 	}
-	
+
 	// Accessors
-	Boolean getDoorOpen() {
+	Boolean isDoorOpen() {
 		return doorOpen;
 	}
-	
-	// Mutators 
+
+	Boolean isDoorClosed() {
+		return !doorOpen;
+	}
+
+	// Mutators
 	void setDoorOpen(Boolean state) {
 		doorOpen = state;
 	}

@@ -12,7 +12,7 @@ public class ElevatorCarPiston {
 	public double up_time = 0;
 	public double down_time = 0;
 	//Position variable for pistonMove()
-	public double floorPostion = destinationFloor * 10 - 10;
+	public double floorPosition = destinationFloor * 10 - 10;
 	public double currentPosition = 0;
 	
 	//Speed of elevator system

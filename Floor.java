@@ -8,7 +8,7 @@ public class Floor {
 
 
 	// Default Constructor, by default the floor is 1
-	Floor(){
+	public Floor(){
 		floorNumber 	= 1;
 		floorDisplay 	= new Display();
 		floorPanel 		= new FloorPanel();
@@ -16,7 +16,7 @@ public class Floor {
 	}
 
 	// Sets the floor number to n
-	Floor(int n) {
+	public Floor(int n) {
 		floorNumber  	= n;
 		floorDisplay 	= new Display();
 		floorPanel 		= new FloorPanel();

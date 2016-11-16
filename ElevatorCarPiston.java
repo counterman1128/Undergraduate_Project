@@ -88,6 +88,10 @@ public class ElevatorCarPiston {
 		return true;
 	}
 	
+	public void setCurrentPosition(double x){
+		currentPositon = x;	
+	}
+	
 	//Mutator for Piston State
 	public void setPistonState(Piston state){
 		object = state;

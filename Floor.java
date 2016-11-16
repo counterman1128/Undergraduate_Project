@@ -44,8 +44,8 @@ public class Floor {
 		if(floorPanel.upButtonPressed())
 			return 1;
 		else if(floorPanel.downButtonPressed())
-			return 0;
-		return -1;
+			return -1;
+		return 0;
 	}
 
 

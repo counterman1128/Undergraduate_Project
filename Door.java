@@ -11,14 +11,7 @@ public class Door {
 	
 	// Accessors
 	Boolean getDoorOpen() {
-		if(sensor.getData())
-		{
-			doorOpen = false;
-		}
-		else
-		{
-			doorOpen = true;
-		}
+		
 		return doorOpen;
 	}
 	

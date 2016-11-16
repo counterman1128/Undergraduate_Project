@@ -14,6 +14,9 @@ public class ElevatorCarPiston {
 	//Position variable for pistonMove()
 	public double currentPosition = 0;
 	
+	//Speed of elevator system
+	public double elevator_speed = 2.0;
+	
 	//Different states for piston object
 	public enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
 	public Piston object;
@@ -90,10 +93,10 @@ public class ElevatorCarPiston {
 	public double pistonMove(){	
 		if(piston == object.MOVING_UP){
 			up_time = time_sec();
-			currentPosition = currentPosition + 2.0 * Math.abs((up_time - down_time));
+			currentPosition = currentPosition + elevator_speed * Math.abs((up_time - down_time));
 		}else if(piston == object.MOVING_DOWN){
 			down_time = time_sec();
-			currentPosition = currentPosition - 2.0 * Math.abs((up_time - down_time));
+			currentPosition = currentPosition - elevator_speed * Math.abs((up_time - down_time));
 		}else{
 			/*
 			 * May need to add functions if piston stationary state breaks calculations
@@ -106,5 +109,10 @@ public class ElevatorCarPiston {
 	public double time_sec(){
 		long elap_time = System.nanoTime() - begin_time;
 		return (double)(elap_time / 1000000000);
+	}
+	
+	public void deacceleration(){
+		if (Math.abs(currentPosition-floorLevel) <= 2)
+			//SET VALUE OF SPEED
 	}
 }

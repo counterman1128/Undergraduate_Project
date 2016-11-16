@@ -10,19 +10,14 @@ public class ControlSystem {
 	public Piston object;
 	
 	//Floor Objects
-	public Floor f1;
-	public Floor f2;
-	public Floor f3;
-	public Floor f4;
-	public Floor f5;
+	public Floor f1 = new Floor(1);
+	public Floor f2 = new Floor(2);
+	public Floor f3 = new Floor(3);
+	public Floor f4 = new Floor(4);
+	public Floor f5 = new Floor(5);
 	public Comparator<Floor> comparator;
 	public PriorityQueue<Floor> queue;
  	ControlSystem(){
-		f1 = new Floor(1);
-		f2 = new Floor(2);
-		f3 = new Floor(3);
-		f4 = new Floor(4);
-		f5 = new Floor(5);
 		comparator = new Comparator<Floor>();
 		queue = new PriorityQueue<Floor>(5, comparator);
 	}

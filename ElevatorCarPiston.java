@@ -125,7 +125,7 @@ public class ElevatorCarPiston {
 	}
 	
 	public void deacceleration(){//Prototype function for elevator deacceleration
-		if (Math.abs(currentPosition-floorLevel) <= 2.0)
+		if (Math.abs(currentPosition-floorPosition) <= 2.0)
 			elevator_speed = elevator_speed/2.0;
 	}
 }

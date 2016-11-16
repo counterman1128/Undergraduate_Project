@@ -41,9 +41,9 @@ public class Floor {
 	}
 	
 	public int getFloorPanelState(){
-		if(floorPanel.upButtonPressed())
+		if(floorPanel.getUpButtonPressed())
 			return 1;
-		else if(floorPanel.downButtonPressed())
+		else if(floorPanel.getDownButtonPressed())
 			return -1;
 		return 0;
 	}

@@ -12,6 +12,7 @@ public class ElevatorCarPiston {
 	public double up_time = 0;
 	public double down_time = 0;
 	//Position variable for pistonMove()
+	public double floorLevel = destinationFloor * 10 - 10;
 	public double currentPosition = 0;
 	
 	//Speed of elevator system
@@ -111,8 +112,8 @@ public class ElevatorCarPiston {
 		return (double)(elap_time / 1000000000);
 	}
 	
-	public void deacceleration(){
-		if (Math.abs(currentPosition-floorLevel) <= 2)
-			//SET VALUE OF SPEED
+	public void deacceleration(){//Prototype function for elevator deacceleration
+		if (Math.abs(currentPosition-floorLevel) <= 2.0 || Math.abs(currentPosition-floorLevel) >= 2.0)
+			elevator_speed = elevator_speed/2.0;
 	}
 }

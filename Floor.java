@@ -39,6 +39,14 @@ public class Floor {
 	public Door getFloorDoor() {
 		return floorDoor;
 	}
+	
+	public int getFloorPanelState(){
+		if(floorPanel.upButtonPressed())
+			return 1;
+		else if(floorPanel.downButtonPressed())
+			return 0;
+		return -1;
+	}
 
 
 }

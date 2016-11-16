@@ -46,6 +46,10 @@ public class ElevatorCarPiston {
 		return destinationFloor;
 	}
 	
+	public double getCurrentPosition(){
+		return currentPosition;
+	}
+	
 	// Mutator
 	public void setCurrnetFloor(int floor) {
 		currentFloor = floor;

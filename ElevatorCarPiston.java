@@ -99,7 +99,7 @@ public class ElevatorCarPiston {
 	
 	//Getter for Piston State
 	public Piston getPistonState(){
-		return object;
+		return piston;
 	}
 	
 	//Calculates the position of the Piston with respect to time and speed

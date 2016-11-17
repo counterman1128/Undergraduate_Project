@@ -11,7 +11,7 @@ import java.util.*;
 	}
 	//Mutator 
 	public void setAlarm (boolean value){
-		Alarm = value;
+		AlarmOn = value;
 	}
 	//Constructor
 	public fireAlarm(){

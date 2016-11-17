@@ -27,7 +27,7 @@ public class Elevator {
 		}
 		numberOfFloors = FLOORS;
 		elevatorCar 	= new ElevatorCar();
-		controlSystem 	= new ElevatorSimulationRun();
+		//controlSystem 	= new ElevatorSimulationRun();
 	}
 
 	// Constructor creates elevator with n floors.

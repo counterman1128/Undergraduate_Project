@@ -50,6 +50,14 @@ public class Floor {
 			return -1;
 		return 0;
 	}
+	
+	public void closeFloorDoor(){
+		floorDoor.setDoorOpen(false);
+	}
+	public void openFloorDoor(){
+		floorDoor.setDoorOpen(true);	
+	}
+	
 
 
 }

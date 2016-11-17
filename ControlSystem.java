@@ -6,7 +6,7 @@ public class ControlSystem {
 	private static boolean DOOR_OPEN;
 	
 	//Used for comparator class
-	public enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
+	//public enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
 	public Piston object;
 	
 	//Floor Objects

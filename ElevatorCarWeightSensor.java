@@ -1,4 +1,5 @@
 package Undergraduate_Project;
+import java.util.ArrayList;
 
 public class ElevatorCarWeightSensor{
 	

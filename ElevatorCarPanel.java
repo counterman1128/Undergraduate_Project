@@ -33,7 +33,7 @@ public class ElevatorCarPanel {
     ElevatorCarPanel() {
     	emergencyMode = false;
     	maintenanceMode = false;
-    	destinationFloor = new LinkedList();
+    	destinationFloor = new LinkedList()<Integer>;
     }
 
 

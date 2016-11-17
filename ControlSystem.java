@@ -1,6 +1,7 @@
 package Undergraduate_Project;
 import Undergraduate_Project.Floor;
 import Undergraduate_Project.Piston;
+import Undergraduate_Project.ElevatorQueue;
 import java.uitl.*;
 public class ControlSystem {
 	private final int NUMBER_OF_FLOORS = 5;
@@ -40,24 +41,3 @@ public class ControlSystem {
 		return currentFloor;
 	}
 }
-//Comparator Class
-	public class ElevatorQueue implements Comparator<Floor>{//May have to add function to check postion of floors compared to each other
-		@Override
-		public int compare(Floor obj1, Floor obj2){
-			if(piston.getPistonState() == object.MOVING_UP){
-				if(obj1.getFloorPanelState() > obj2.getFloorPanelState())
-					return 1;
-				if(obj1.getFloorPanelState() < obj2.getFloorPanelState())
-					return -1;
-			}
-			if(piston.getPistonState() == object.MOVING_DOWN){
-				if(obj1.getFloorPanelState() < obj2.getFloorPanelState())
-					return 1;
-				if(obj1.getFloorPanelState() > obj2.getFloorPanelState())
-					return -1;
-			}
-			if(piston.getPistonState() == object.STATIONARY)
-				return 1;
-			return 0;
-		}
-	}

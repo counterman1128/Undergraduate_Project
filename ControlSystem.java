@@ -2,7 +2,8 @@ package Undergraduate_Project;
 import Undergraduate_Project.Floor;
 import Undergraduate_Project.Piston;
 
-import java.uitl.*;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 public class ControlSystem {
 	private final int NUMBER_OF_FLOORS = 5;
 	private final int INITIAL_ELEVATOR_FLOOR = 1;
@@ -18,11 +19,11 @@ public class ControlSystem {
 	public Floor f3 = new Floor(3);
 	public Floor f4 = new Floor(4);
 	public Floor f5 = new Floor(5);
-	public Comparator<Floor> comparator;
-	public PriorityQueue<Floor> queue;
+	public Comparator<Floor> comparator = new ElevatorQueue();
+	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
  	ControlSystem(){
-		comparator = new ElevatorQueue();
-		queue = new PriorityQueue<Floor>(5, comparator);
+		
+		
 	}
 	/*
 	 * Develop function to receive calls from Floor Panels. Then push the floor

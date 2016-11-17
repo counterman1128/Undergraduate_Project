@@ -39,8 +39,8 @@ public class ControlSystem {
 		int currentFloor = piston.movePistonToFloor(targetFloor);
 		return currentFloor;
 	}
-	
-	//Comparator Class
+}
+//Comparator Class
 	public class ElevatorQueue implements Comparator<Floor>{//May have to add function to check postion of floors compared to each other
 		@Override
 		public int compare(Floor obj1, Floor obj2){
@@ -61,4 +61,3 @@ public class ControlSystem {
 			return 0;
 		}
 	}
-}

@@ -15,6 +15,6 @@ import java.util.*;
 	}
 	//Constructor
 	public fireAlarm(){
-		AlarmOn = false	
+		AlarmOn = false;
 	}
 }

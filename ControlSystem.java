@@ -75,7 +75,7 @@ public class ControlSystem {
 					return -1;
 			}
 			if(piston.getPistonState() == object.STATIONARY)
-				return -1;
+				return 1;
 			return 0;
 		}
 	}

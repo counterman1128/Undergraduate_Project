@@ -37,7 +37,7 @@ public class ControlSystem {
 	 * 	Always add the next highest or lowest floor first. 
 	 */
 	public void checkForFloorInput(){
-		for(int i: floor){
+		for(int i = 0; i < NUMBER_OF_FLOORS; i++){
 			if(floor[i].getFloorPanelState() != 0)
 				queue.add(floor[i]);
 		}

@@ -1,5 +1,5 @@
-package elevatorProject;
-
+package Undergraduate_Project;
+import Undergraduate_Project.DoorSensor;
 public class Door {
 	public boolean doorOpen;
 	DoorSensor sensor;

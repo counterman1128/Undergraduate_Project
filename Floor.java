@@ -27,7 +27,7 @@ public class Floor {
 		floorDisplay 	= new Display();
 		floorPanel 		= new FloorPanel();
 		floorDoor 		= new Door();
-		panel = floorDoor.getPanelState();
+		panel = floorDoor.returnPanelStatus();
 	}
 
 	// Accessors

@@ -58,6 +58,8 @@ public class ControlSystem {
 					return -1;
 				if(obj1.floorPosition < obj2.floorPosition)
 					return 1;
+				else
+					return -1;
 			
 			}
 			if(piston.getPistonState() == object.MOVING_DOWN){
@@ -65,9 +67,13 @@ public class ControlSystem {
 					return 1;
 				if(obj1.getFloorPanelState() > obj2.getFloorPanelState())
 					return -1;
+				if(obj1.floorPosition > obj2.floorPosition)
+					return 1;
+				else
+					return -1;
 			}
 			if(piston.getPistonState() == object.STATIONARY)
-				return 1;
+				return -1;
 			return 0;
 		}
 	}

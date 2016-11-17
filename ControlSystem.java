@@ -17,7 +17,7 @@ public class ControlSystem {
 	public Floor f3 = new Floor(3);
 	public Floor f4 = new Floor(4);
 	public Floor f5 = new Floor(5);
-	public static Comparator<Floor> comparator = new Comparator<Floor>();
+	public static Comparator<Floor> comparator = new ElevatorQueue();
 	public PriorityQueue<Floor> queue;
  	ControlSystem(){
 		queue = new PriorityQueue<Floor>(5, comparator);

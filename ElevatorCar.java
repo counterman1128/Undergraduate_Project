@@ -1,13 +1,13 @@
 package Undergraduate_Project;
 import Undergraduate_Project.Door;
 import Undergraduate_Project.Display;
-import Undergraduate_Project.ElevatorCarPiston;
+//import Undergraduate_Project.ElevatorCarPiston;
 import Undergraduate_Project.ElevatorCarPanel;
 public class ElevatorCar {
 //	private Door 			floorDoor;
 	private Door 			elevatorDoor;
 	private Display 		elevatorDisplay;
-	private ElevatorCarPiston elevatorPiston;
+	//private ElevatorCarPiston elevatorPiston;
 	private ElevatorCarPanel elevatorCarPanel;
 	private int 			currentFloor;
 	private int 			destinationFloor;
@@ -30,7 +30,7 @@ public class ElevatorCar {
 //		floorDoor 		= new Door();
 		elevatorDoor 	= new Door();
 		elevatorDisplay = new Display();
-		elevatorPiston 	= new ElevatorCarPiston();
+		//elevatorPiston 	= new ElevatorCarPiston();
 		elevatorCarPanel = new ElevatorCarPanel();
 		currentFloor 	= 1;
 	}
@@ -43,14 +43,22 @@ public class ElevatorCar {
 	public Door getElevatorDoor() {
 		return elevatorDoor;
 	}
-
+	
+	public void openElevatorDoor(){
+		elevatorDoor.setDoorOpen(true);	
+	}
+	
+	public void closeElevatorDoor(){
+		elevatorDoor.setDoorOpen(false);	
+	}
+	
 	public Display getElevatorDisplay() {
 		return elevatorDisplay;
 	}
 
-	public ElevatorCarPiston getElevatorCarPiston() {
+	/*public ElevatorCarPiston getElevatorCarPiston() {
 		return elevatorPiston;
-	}
+	}*/
 
 	public ElevatorCarPanel getElevatorCarPanel() {
 		return elevatorCarPanel;

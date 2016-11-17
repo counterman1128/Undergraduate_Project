@@ -3,6 +3,7 @@ import Undergraduate_Project.Display;
 import Undergraduate_Project.FloorPanel;
 import Undergraduate_Project.Door;
 
+
 public class Floor {
 	private int 		floorNumber;
 	private Display 	floorDisplay;
@@ -10,6 +11,7 @@ public class Floor {
 	private Door 		floorDoor;
 
 	public double floorPosition;
+	public Object panel;
 	// Default Constructor, by default the floor is 1
 	public Floor(){
 		floorNumber 	= 1;
@@ -25,6 +27,7 @@ public class Floor {
 		floorDisplay 	= new Display();
 		floorPanel 		= new FloorPanel();
 		floorDoor 		= new Door();
+		panel = floorDoor.getPanelState();
 	}
 
 	// Accessors
@@ -52,6 +55,9 @@ public class Floor {
 		return 0;
 	}
 	
+	public returnPanelStatus(){
+		return panel;	
+	}
 	
 	public void closeFloorDoor(){
 		floorDoor.setDoorOpen(false);

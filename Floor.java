@@ -1,4 +1,7 @@
-package elevatorProject;
+package Undergraduate_Project;
+import Undergraduate_Project.Display;
+import Undergraduate_Project.FloorPanel;
+import Undergraduate_Project.Door;
 
 public class Floor {
 	private int 		floorNumber;

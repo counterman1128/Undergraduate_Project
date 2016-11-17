@@ -14,16 +14,17 @@ public class ControlSystem {
 	public Piston object;
 	
 	//Floor Objects
-	public Floor f1 = new Floor(1);
-	public Floor f2 = new Floor(2);
-	public Floor f3 = new Floor(3);
-	public Floor f4 = new Floor(4);
-	public Floor f5 = new Floor(5);
+	public Floor []floor;
+	
+	
+	//Queue
 	public Comparator<Floor> comparator = new ElevatorQueue();
 	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
+	
+	
  	ControlSystem(){
-		
-		
+		for(int i = 0; i < NUMBER_OF_FLOORS; i++)
+			floor[i] = new Floor(i);	
 	}
 	/*
 	 * Develop function to receive calls from Floor Panels. Then push the floor

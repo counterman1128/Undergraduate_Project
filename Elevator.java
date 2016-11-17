@@ -39,7 +39,7 @@ public class Elevator {
 		}
 		numberOfFloors  = n;
 		elevatorCar 	= new ElevatorCar();
-		controlSystem 	= new ElevatorSimulationRun();
+		//controlSystem 	= new ElevatorSimulationRun();
 	}
 
 

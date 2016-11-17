@@ -1,6 +1,7 @@
 package Undergraduate_Project;
 import Undergraduate_Project.Floor;
 import Undergraduate_Project.Piston;
+import Undergraduate_Project.FloorPanelState;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -12,6 +13,7 @@ public class ControlSystem {
 	//Used for comparator class
 	//public enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
 	public Piston object;
+	public FloorPanelState state;
 	
 	//Floor Objects
 	public Floor []floor;
@@ -56,9 +58,9 @@ public class ControlSystem {
 					return 1;
 				if(obj1.getFloorPanelState() < obj2.getFloorPanelState())  
 					return -1;
-				if(obj1.floorPosition < obj2.floorPosition)
+				if(obj1.floorPosition < obj2.floorPosition && obj1.getFloorPanel() == state.UP && obj.floorPosition > piston.getCurrentPosition())
 					return 1;
-				else
+				else if(obj2.getFloorPanel() == state.UP && ob2.floorPosition > piston.getCurrentPosition())
 					return -1;
 			
 			}
@@ -67,9 +69,9 @@ public class ControlSystem {
 					return 1;
 				if(obj1.getFloorPanelState() > obj2.getFloorPanelState())
 					return -1;
-				if(obj1.floorPosition > obj2.floorPosition)
+				if(obj1.floorPosition > obj2.floorPosition && obj1.getFloorPanel() == state.DOWN && obj.floorPosition < piston.getCurrentPosition())
 					return 1;
-				else
+				else if(obj2.getFloorPanel() == state.DOWN && ob2.floorPosition < piston.getCurrentPosition())
 					return -1;
 			}
 			if(piston.getPistonState() == object.STATIONARY)

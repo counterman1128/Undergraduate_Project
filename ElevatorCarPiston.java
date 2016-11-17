@@ -19,7 +19,7 @@ public class ElevatorCarPiston {
 	public double elevator_speed = 2.0;
 	
 	//Different states for piston object
-	public enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
+	//public enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
 	public Piston object;
 	
 	// Default Constructor

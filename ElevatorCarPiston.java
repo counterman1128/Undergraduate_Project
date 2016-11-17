@@ -1,5 +1,5 @@
 package Undergraduate_Project;
-
+import Undergraduate_Project.Piston;
 public class ElevatorCarPiston {
 	private int currentFloor;
 	private int lastFloor;

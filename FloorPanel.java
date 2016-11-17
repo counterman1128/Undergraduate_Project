@@ -1,27 +1,17 @@
 package Undergraduate_Project;
-
+import Undergraduate_Project.FloorPanelState;
 public class FloorPanel {
-	private Boolean upButtonPressed;
-	private Boolean downButtonPressed;
-	
+	public FloorPanelState state;
+	public Object panel = new Object();
 	FloorPanel() {
-		upButtonPressed = false;
-		downButtonPressed = false;
+		panel = state.VOID;
 	}
 	
-	Boolean getUpButtonPressed() {
-		return upButtonPressed;
+	public Object getPanelState() {
+		return panel;
 	}
 	
-	Boolean getDownButtonPressed() {
-		return downButtonPressed;
-	}
-	
-	void setUpButtonPressed(Boolean newState) {
-		upButtonPressed = newState;
-	}
-	
-	void setDownButtonPressed(Boolean newState) {
-		downButtonPressed = newState;
+	public void setPanelState(FloorPanelState newState) {
+		panel = state.newState;
 	}
 }

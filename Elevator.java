@@ -141,4 +141,4 @@ public class Elevator {/*
 
 //	Elevetor.Floor[2].FloorPanel.setUpButtonPressed(true);
 //	Elevartor.Floor[2].setUpButtonPressed(true);
-}
+}*/

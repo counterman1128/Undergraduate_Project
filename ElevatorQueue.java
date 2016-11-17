@@ -1,5 +1,10 @@
+package Undergraduate_Project;
+import Undergraduate_Project.Piston;
+import java.util.*;
 //Comparator Class
 public class ElevatorQueue implements Comparator<Floor>{//May have to add function to check postion of floors compared to each other
+	public Piston object;
+	
 	@Override
 	public int compare(Floor obj1, Floor obj2){
 		if(piston.getPistonState() == object.MOVING_UP){

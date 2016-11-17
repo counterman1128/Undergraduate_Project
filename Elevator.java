@@ -3,11 +3,11 @@ import Undergraduate_Project.ElevatorCar;
 import Undergraduate_Project.Floor;
 import java.util.*;
 
-public class Elevator {
+public class Elevator {/*
 	////////// Variables //////////
 
-	private int numberOfFloors;
-	private Floor [] floor;
+	//private int numberOfFloors;
+	//private Floor [] floor;
 	private ElevatorCar elevatorCar;
 	//private ElevatorSimulationRun controlSystem;
 
@@ -131,16 +131,13 @@ public class Elevator {
 
 	// Opens the door of the elevator car
 	void openElevatorCarDoor() {
-		elevatorCar.getElevatorDoor().setDoorOpen(DOOR_OPEN);
+		elevatorCar.getElevatorDoor().setDoorOpen(true);
 	}
 
 	// Closes the door of the elevator car
 	void closeElevatorCarDoor() {
-		elevatorCar.getElevatorDoor().setDoorOpen(DOOR_CLOSED);
+		elevatorCar.getElevatorDoor().setDoorOpen(false);
 	}
-
-
-
 
 //	Elevetor.Floor[2].FloorPanel.setUpButtonPressed(true);
 //	Elevartor.Floor[2].setUpButtonPressed(true);

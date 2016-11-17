@@ -55,7 +55,7 @@ public class Floor {
 		return 0;
 	}
 	
-	public returnPanelStatus(){
+	public Object returnPanelStatus(){
 		return panel;	
 	}
 	

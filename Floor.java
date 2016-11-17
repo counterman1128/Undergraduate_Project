@@ -57,7 +57,7 @@ public class Floor {
 	public void openFloorDoor(){
 		floorDoor.setDoorOpen(true);	
 	}
-	
-
-
+	public boolean floorDoorStatus(){
+		return floorDoor.getDoorOpen();	
+	}
 }

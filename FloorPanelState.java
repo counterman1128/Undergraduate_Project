@@ -1,3 +1,3 @@
 package Undergraduate_Project;
 
-public enum FloorPanelState{UP,NULL,DOWN}
+public enum FloorPanelState{UP,VOID,DOWN}

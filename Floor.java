@@ -52,6 +52,7 @@ public class Floor {
 		return 0;
 	}
 	
+	
 	public void closeFloorDoor(){
 		floorDoor.setDoorOpen(false);
 	}

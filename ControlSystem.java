@@ -21,7 +21,8 @@ public class ControlSystem {
 	public Comparator<Floor> comparator = new ElevatorQueue();
 	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
 	
-	
+	public ElevatorCar elevatorCar = new ElevatorCar();
+	public ElevatorCarPiston piston = new ElevatorCarPiston(INITIAL_ELEVATOR_FLOOR, NUMBER_OF_FLOORS);
  	ControlSystem(){
 		for(int i = 0; i < NUMBER_OF_FLOORS; i++)
 			floor[i] = new Floor(i);	
@@ -35,9 +36,13 @@ public class ControlSystem {
 	 * 
 	 * 	Always add the next highest or lowest floor first. 
 	 */
+	public void checkForFloorInput(){
+		for(int i: floor){
+			if(floor[i].getFloorPanelState() != 0)
+				queue.add(floor[i]);
+		}
+	}
 	
-	ElevatorCarPiston piston = new ElevatorCarPiston(INITIAL_ELEVATOR_FLOOR, 
-			NUMBER_OF_FLOORS);
 	int moveToFloor(int targetFloor) {
 		int currentFloor = piston.movePistonToFloor(targetFloor);
 		return currentFloor;
@@ -51,6 +56,9 @@ public class ControlSystem {
 					return 1;
 				if(obj1.getFloorPanelState() < obj2.getFloorPanelState())  
 					return -1;
+				if(obj1.floorPosition < obj2.floorPosition)
+					return 1;
+			
 			}
 			if(piston.getPistonState() == object.MOVING_DOWN){
 				if(obj1.getFloorPanelState() < obj2.getFloorPanelState())

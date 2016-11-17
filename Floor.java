@@ -9,7 +9,7 @@ public class Floor {
 	private FloorPanel 	floorPanel;
 	private Door 		floorDoor;
 
-
+	public double floorPosition;
 	// Default Constructor, by default the floor is 1
 	public Floor(){
 		floorNumber 	= 1;
@@ -20,6 +20,7 @@ public class Floor {
 
 	// Sets the floor number to n
 	public Floor(int n) {
+		floorPosition = n * 10 - 10;
 		floorNumber  	= n;
 		floorDisplay 	= new Display();
 		floorPanel 		= new FloorPanel();

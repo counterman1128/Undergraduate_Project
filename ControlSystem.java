@@ -1,5 +1,5 @@
-package elevatorProject;
-import elevatorProject.Floor;
+package Undergraduate_Project;
+import Undergraduate_Project.Floor;
 public class ControlSystem {
 	private final int NUMBER_OF_FLOORS = 5;
 	private final int INITIAL_ELEVATOR_FLOOR = 1;

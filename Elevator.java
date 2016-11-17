@@ -1,4 +1,6 @@
-package elevatorProject;
+package Undergraduate_Project;
+import Undergraduate_Project.ElevatorCar;
+import Undergraduate_Project.Floor;
 import java.util.*;
 
 public class Elevator {
@@ -7,7 +9,7 @@ public class Elevator {
 	private int numberOfFloors;
 	private Floor [] floor;
 	private ElevatorCar elevatorCar;
-	private ElevatorSimulationRun controlSystem;
+	//private ElevatorSimulationRun controlSystem;
 
 	static final boolean DOOR_OPEN = true;
 	static final boolean DOOR_CLOSED = false;

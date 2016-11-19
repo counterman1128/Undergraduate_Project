@@ -1,5 +1,4 @@
 package Undergraduate_Project;
-import java.util.*;
 
 public class DoorSensor {
 	

@@ -2,6 +2,9 @@ package Undergraduate_Project;
 
 	public class ElevatorFan {
 	
+	//Addeed fanOn
+	Boolean fanOn = false;
+
 	//Accessor 
 	public boolean fanOn(){
 		return fanOn;

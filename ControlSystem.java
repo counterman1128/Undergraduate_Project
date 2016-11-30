@@ -45,6 +45,14 @@ public class ControlSystem {
 		}
 	}
 	
+	public void removeFloorFromQueue(Floor obj){
+		queue.remove(obj);
+	}
+	
+	public void clearQueue(){
+		queue.clear();	
+	}
+	
 	int moveToFloor(int targetFloor) {
 		int currentFloor = piston.movePistonToFloor(targetFloor);
 		return currentFloor;

@@ -14,7 +14,7 @@ package Undergraduate_Project;
 		fanOn = state;
 	}
 	//Constructor
-	public elevatorFan(){
+	public ElevatorFan(){
 		fanOn = false;
 	}
 }

@@ -101,7 +101,13 @@ public class ElevatorCarPiston {
 	public Object getPistonState(){
 		return piston;
 	}
+	public void resetSpeed(){
+		elevatorSpeed = 2.0;	
+	}
 	
+	public void setSpeed(double value){
+		elevatorSpeed = value;	
+	}
 	//Calculates the position of the Piston with respect to time and speed
 	public double pistonMove(){	
 		if(piston == object.MOVING_UP){

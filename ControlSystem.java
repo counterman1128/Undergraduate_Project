@@ -2,6 +2,7 @@ package Undergraduate_Project;
 import Undergraduate_Project.Floor;
 import Undergraduate_Project.Piston;
 import Undergraduate_Project.FloorPanelState;
+import Undergraduate_Project.EmergencyBreaks;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -18,6 +19,8 @@ public class ControlSystem {
 	//Floor Objects
 	public Floor []floor;
 	
+	//EM Brake Object
+	public EmergencyBreaks brake = new EmergencyBreaks();
 	
 	//Queue
 	public Comparator<Floor> comparator = new ElevatorQueue();
@@ -56,6 +59,26 @@ public class ControlSystem {
 	int moveToFloor(int targetFloor) {
 		int currentFloor = piston.movePistonToFloor(targetFloor);
 		return currentFloor;
+	}
+	
+	public double getElevatorSpeed(){
+		return piston.getSpeed();
+	}
+	
+	public void speedSafety(){
+		if(piston.getSpeed() > 2.0)
+			this.EM_Brake_Procedure();
+	}
+	public void EM_Brake_Procedure(){
+		brake.setBreaks(true);
+		while(piston.getSpeed() > 0.0){
+			piston.deacceleration();
+			if(piston.getSpeed() <= 0.0)
+				piston.setSpeed(0.0);
+		}
+		//Implement function to move elevator to closest floor
+		brake.setBreaks(false);
+		piston.resetSpeed();
 	}
 	
 	public class ElevatorQueue extends ControlSystem implements Comparator<Floor> {//May have to add function to check postion of floors compared to each other

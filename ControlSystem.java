@@ -1,3 +1,30 @@
+/* Class Variables
+	private final int NUMBER_OF_FLOORS = 5;
+	private final int INITIAL_ELEVATOR_FLOOR = 1;
+	private static boolean DOOR_OPEN;
+	public Piston object;
+	public FloorPanelState state;
+	public Floor []floor;
+	public EmergencyBreaks brake = new EmergencyBreaks();
+	public Comparator<Floor> comparator = new ElevatorQueue();
+	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
+	public ElevatorCar elevatorCar = new ElevatorCar();
+	public ElevatorCarPiston piston = new ElevatorCarPiston(INITIAL_ELEVATOR_FLOOR, NUMBER_OF_FLOORS);
+	
+  Class Methods
+	public ControlSystem();
+	public void checkForFloorInput();
+	public void removeFloorFromQueue(Floor obj);
+	public void clearQueue();
+	public int moveToFloor(int targetFloor);
+	public double getElevatorSpeed();
+	public void speedSafety();
+	public void EM_Brake_Procedure();
+	public void door_function();
+	
+  Sub Class
+  	public class ElevatorQueue extends ControlSystem implements Comparator<Floor>{}
+*/
 package Undergraduate_Project;
 import Undergraduate_Project.Floor;
 import Undergraduate_Project.Piston;

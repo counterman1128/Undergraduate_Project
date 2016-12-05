@@ -69,6 +69,7 @@ public class ControlSystem {
 		if(piston.getSpeed() > 2.0)
 			this.EM_Brake_Procedure();
 	}
+	
 	public void EM_Brake_Procedure(){
 		brake.setBreaks(true);
 		while(piston.getSpeed() > 0.0){
@@ -79,6 +80,18 @@ public class ControlSystem {
 		//Implement function to move elevator to closest floor
 		brake.setBreaks(false);
 		piston.resetSpeed();
+	}
+	
+	//Opening Floor Door and elevator Door when destination is reached
+	public void door_function(){
+		//If elevator is still moving deny call to open door
+		if(piston.getPistonState() != object.STATIONARY)
+			break;
+		//Check floor sensor. If piston position equals floor position then open floor door and elevator door
+		if(piston.getCurrentPosition() == piston.getDestinationFloor()){
+			elevatorCar.setDoorOpen();
+			floor[piston.getCurrentFloor].setDoorOpen();
+		}
 	}
 	
 	public class ElevatorQueue extends ControlSystem implements Comparator<Floor> {//May have to add function to check postion of floors compared to each other

@@ -17,7 +17,7 @@ public class Door {
 	
 	// Mutators 
 	void setDoorOpen(Boolean state) {
-		Thread.sleep(5000);
+		Thread.sleep(2500);
 		doorOpen = state;
 	}
 }

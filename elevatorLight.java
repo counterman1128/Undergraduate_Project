@@ -1,7 +1,7 @@
 package Undergraduate_Project;
 
 	public class elevatorLight {
-	
+	public boolean lightOn = true;
 	//Accessor 
 	public boolean lightOn(){
 		return lightOn;

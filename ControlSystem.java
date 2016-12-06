@@ -30,6 +30,7 @@ import Undergraduate_Project.Floor;
 import Undergraduate_Project.Piston;
 import Undergraduate_Project.FloorPanelState;
 import Undergraduate_Project.EmergencyBreaks;
+import Undergraduate_Project.Door;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -112,10 +113,10 @@ public class ControlSystem {
 	//Opening Floor Door and elevator Door when destination is reached
 	public void door_function(){
 		//If elevator is still moving deny call to open door
-		if(piston.getPistonState() != object.STATIONARY)
-			break;
+		if(piston.getPistonState() != object.STATIONARY){
+		
 		//Check floor sensor. If piston position equals floor position then open floor door and elevator door
-		if(piston.getCurrentPosition() == piston.getDestinationFloor()){
+		}else if(piston.getCurrentPosition() == piston.getDestinationFloor()){
 			elevatorCar.setDoorOpen();
 			floor[piston.getCurrentFloor].setDoorOpen();
 		}

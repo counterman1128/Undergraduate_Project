@@ -59,10 +59,10 @@ public class Floor {
 		return panel;	
 	}
 	
-	public void closeFloorDoor(){
+	public void closeFloorDoor()throws InterruptedException{
 		floorDoor.setDoorOpen(false);
 	}
-	public void openFloorDoor(){
+	public void openFloorDoor()throws InterruptedException{
 		floorDoor.setDoorOpen(true);	
 	}
 	public boolean floorDoorStatus(){

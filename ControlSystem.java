@@ -118,7 +118,7 @@ public class ControlSystem {
 		//Check floor sensor. If piston position equals floor position then open floor door and elevator door
 		}else if(piston.getCurrentPosition() == piston.getDestinationFloor()){
 			elevatorCar.openElevatorDoor();
-			floor[piston.getCurrentFloor].openFloorDoor();
+			floor[piston.getCurrentFloor()].openFloorDoor();
 		}
 	}
 	

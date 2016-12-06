@@ -111,7 +111,7 @@ public class ControlSystem {
 	}
 	
 	//Opening Floor Door and elevator Door when destination is reached
-	public void door_function(){
+	public void door_function()throws InterruptedException{
 		//If elevator is still moving deny call to open door
 		if(piston.getPistonState() != object.STATIONARY){
 		

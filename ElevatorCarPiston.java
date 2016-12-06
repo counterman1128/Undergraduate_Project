@@ -102,15 +102,15 @@ public class ElevatorCarPiston {
 		return piston;
 	}
 	public void resetSpeed(){
-		elevatorSpeed = 2.0;	
+		elevator_speed = 2.0;	
 	}
 	
 	public void setSpeed(double value){
-		elevatorSpeed = value;	
+		elevator_speed = value;	
 	}
 	
 	public double getSpeed(){
-		return elevatorSpeed;	
+		return elevator_speed;	
 	}
 	//Calculates the position of the Piston with respect to time and speed
 	public double pistonMove(){	

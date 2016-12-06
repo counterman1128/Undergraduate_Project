@@ -16,7 +16,7 @@ public class Door {
 	}
 	
 	// Mutators 
-	void setDoorOpen(Boolean state) {
+	void setDoorOpen(Boolean state) throw InterruptedException {
 		Thread.sleep(2500);
 		doorOpen = state;
 	}

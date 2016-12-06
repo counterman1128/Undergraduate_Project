@@ -44,11 +44,11 @@ public class ElevatorCar {
 		return elevatorDoor;
 	}
 	
-	public void openElevatorDoor(){
+	public void openElevatorDoor()throws InterruptedException{
 		elevatorDoor.setDoorOpen(true);	
 	}
 	
-	public void closeElevatorDoor(){
+	public void closeElevatorDoor()throws InterruptedException{
 		elevatorDoor.setDoorOpen(false);	
 	}
 	

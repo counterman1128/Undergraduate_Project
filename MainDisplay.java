@@ -12,13 +12,16 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import java.awt.Image.*;
-
+import java.util.*;
 //Files
+
 import Undergraduate_Project.CarPanelGUI;
 import Undergraduate_Project.FloorPanelGUI;
 import Undergraduate_Project.PistonPanelGUI;
 import Undergraduate_Project.InputPanelGUI;
-	
+import Undergraduate_Project.ControlSystem;
+import Undergraduate_Project.ElevatorCarPiston;
+
 public class MainDisplay {
 
 	private JFrame frame;
@@ -26,12 +29,15 @@ public class MainDisplay {
 	private static FloorPanelGUI fp;
 	private static CarPanelGUI cp;
 	private static InputPanelGUI ip;
+	//private static ControlSystem cs = new ControlSystem();
+	private static ElevatorCarPiston daPiston = new ElevatorCarPiston();
+	
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+	public static void main(String[] args) throws InterruptedException{
+		/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					MainDisplay window = new MainDisplay();
@@ -40,7 +46,13 @@ public class MainDisplay {
 					e.printStackTrace();
 				}
 			}
-		});
+		});*/
+		MainDisplay window = new MainDisplay();
+		window.frame.setVisible(true);
+		for(int i=0;i<26;i++){
+			Thread.sleep(1000);
+			pp.setPiston(i);
+		}
 	}
 
 	/**
@@ -77,6 +89,5 @@ public class MainDisplay {
 		ip.setSize(207, 695);
 		ip.setLocation(953, 13);
 		frame.getContentPane().add(ip);
-		
 	}
 }

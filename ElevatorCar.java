@@ -72,7 +72,9 @@ public class ElevatorCar {
 		return destinationFloor;
 	}
 
-
+	public int getPanelCall(){
+		return elevatorCarPanel.getNextFloor();
+	}
 
 	// Mutators
 	public static void setEmergencyMode(Boolean state){

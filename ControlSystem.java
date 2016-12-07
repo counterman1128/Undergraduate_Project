@@ -20,8 +20,10 @@
 	public double getElevatorSpeed();
 	public void speedSafety();
 	public void EM_Brake_Procedure();
+	public void FireAlarmCheck();
 	public void door_function();
 	public void moveToNearestFloor();
+	public void SystemInputCheck();
 	
   Sub Class
   	public class ElevatorQueue extends ControlSystem implements Comparator<Floor>{}
@@ -32,6 +34,9 @@ import Undergraduate_Project.Piston;
 import Undergraduate_Project.FloorPanelState;
 import Undergraduate_Project.EmergencyBreaks;
 import Undergraduate_Project.Door;
+import Undergraduate_Project.elevatorLight;
+import Undergraduate_Project.ElevatorFan;
+import Undergraduate_Project.fireAlarm;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -55,6 +60,7 @@ public class ControlSystem {
 	public Comparator<Floor> comparator = new ElevatorQueue();
 	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
 	
+	public fireAlarm alarm = new fireAlarm();
 	public ElevatorCar elevatorCar = new ElevatorCar();
 	public ElevatorCarPiston piston = new ElevatorCarPiston(INITIAL_ELEVATOR_FLOOR, NUMBER_OF_FLOORS);
  	ControlSystem(){
@@ -111,6 +117,11 @@ public class ControlSystem {
 		piston.resetSpeed();
 	}
 	
+	public void FireAlarmCheck(){
+		if(alarm.AlarmOn() == true)
+			this.moveToNearestFloor();
+	}
+	
 	//Opening Floor Door and elevator Door when destination is reached
 	public void door_function()throws InterruptedException{
 		//If elevator is still moving deny call to open door
@@ -127,18 +138,23 @@ public class ControlSystem {
 	
 	//Used for Emergency Functions
 	public void moveToNearestFloor(){
-		if(piston.getCurrentPosition() < 5)
+		if(piston.getCurrentPosition() < 5.0)
 			piston.movePistonToFloor(1);
-		if(piston.getCurrentPosition() < 15)
+		if(piston.getCurrentPosition() < 15.0)
 			piston.movePistonToFloor(2);
-		if(piston.getCurrentPosition() < 25)
+		if(piston.getCurrentPosition() < 25.0)
 			piston.movePistonToFloor(3);
-		if(piston.getCurrentPosition() < 35)
+		if(piston.getCurrentPosition() < 35.0)
 			piston.movePistonToFloor(4);
 		else
 			piston.movePistonToFloor(5);
 	}
 	
+	public void SystemInputCheck(){
+		this.checkForFloorInput();
+		this.speedSafety();
+		this.FireAlarmCheck();
+	}
 	
 	public class ElevatorQueue extends ControlSystem implements Comparator<Floor> {//May have to add function to check postion of floors compared to each other
 		

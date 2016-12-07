@@ -21,6 +21,7 @@
 	public void speedSafety();
 	public void EM_Brake_Procedure();
 	public void door_function();
+	public void moveToNearestFloor();
 	
   Sub Class
   	public class ElevatorQueue extends ControlSystem implements Comparator<Floor>{}
@@ -119,7 +120,21 @@ public class ControlSystem {
 		}else if(piston.getCurrentPosition() == piston.getDestinationFloor()){
 			elevatorCar.openElevatorDoor();
 			floor[piston.getCurrentFloor()].openFloorDoor();
+			this.removeFloorFromQueue(floor[piston.getCurrentFloor()])
 		}
+	}
+	
+	public void moveToNearestFloor(){
+		if(piston.getCurrentPosition() < 5)
+			piston.movePistonToFloor(1);
+		if(piston.getCurrentPosition() < 15)
+			piston.movePistonToFloor(2);
+		if(piston.getCurrentPosition() < 25)
+			piston.movePistonToFloor(3);
+		if(piston.getCurrentPosition() < 35)
+			piston.movePistonToFloor(4);
+		else
+			piston.movePistonToFloor(5);
 	}
 	
 	public class ElevatorQueue extends ControlSystem implements Comparator<Floor> {//May have to add function to check postion of floors compared to each other

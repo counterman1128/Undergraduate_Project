@@ -21,7 +21,7 @@ import Undergraduate_Project.InputPanelGUI;
 	
 public class MainDisplay {
 
-	private static JFrame frame;
+	private JFrame frame;
 	private static PistonPanelGUI pp;
 	private static FloorPanelGUI fp;
 	private static CarPanelGUI cp;
@@ -47,12 +47,12 @@ public class MainDisplay {
 	 * Create the application.
 	 */
 	public MainDisplay() {
-		//initialize();
+		initialize();
 	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private static void initialize() {
+	private void initialize() {
 
 		// creates main application window
 		frame = new JFrame("Undergrad Elevator Control System");

@@ -125,6 +125,7 @@ public class ControlSystem {
 		}
 	}
 	
+	//Used for Emergency Functions
 	public void moveToNearestFloor(){
 		if(piston.getCurrentPosition() < 5)
 			piston.movePistonToFloor(1);
@@ -137,6 +138,7 @@ public class ControlSystem {
 		else
 			piston.movePistonToFloor(5);
 	}
+	
 	
 	public class ElevatorQueue extends ControlSystem implements Comparator<Floor> {//May have to add function to check postion of floors compared to each other
 		

@@ -119,7 +119,7 @@ public class ControlSystem {
 		piston.resetSpeed();
 	}
 	
-	public void FireAlarmCheck(){
+	public void FireAlarmCheck()throws InterruptedException{
 		if(alarm.AlarmOn() == true){
 			this.moveToNearestFloor();
 			floor[piston.getCurrentFloor()].openFloorDoor();	

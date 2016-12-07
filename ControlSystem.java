@@ -120,7 +120,8 @@ public class ControlSystem {
 		}else if(piston.getCurrentPosition() == piston.getDestinationFloor()){
 			elevatorCar.openElevatorDoor();
 			floor[piston.getCurrentFloor()].openFloorDoor();
-			this.removeFloorFromQueue(floor[piston.getCurrentFloor()])
+			this.removeFloorFromQueue(floor[piston.getCurrentFloor()]);
+			floor[piston.getCurrentFloor()].openFloorDoor();
 		}
 	}
 	

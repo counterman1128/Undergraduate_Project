@@ -265,7 +265,7 @@ public class PistonPanelGUI extends JPanel {
 	// Sets the piston to position 15
 	public void setPiston15() {
 		piston.setIcon(piston_15);
-		piston.setBounds(36, 113, 119, 538);
+		piston.setBounds(36, 191, 119, 538);
 	}
 	
 	// Sets the piston to position 16
@@ -277,7 +277,7 @@ public class PistonPanelGUI extends JPanel {
 	// Sets the piston to position 17
 	public void setPiston17() {
 		piston.setIcon(piston_17);
-		piston.setBounds(36, 89, 119, 542);
+		piston.setBounds(36, 167, 119, 542);
 	}
 
 	// Sets the piston to position 18
@@ -328,5 +328,3 @@ public class PistonPanelGUI extends JPanel {
 		piston.setBounds(36, -1, 119, 701);
 	}
 }
-
-

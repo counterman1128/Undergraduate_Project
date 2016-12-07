@@ -51,6 +51,18 @@ public class FloorPanelGUI extends JPanel {
 	private JLabel ele_door_one;
 	private ImageIcon floor_num_1;
 	
+	// Hold the state of the buttons
+	// false = off; true = on
+	private boolean f1u = false;
+	private boolean f2u = false;
+	private boolean f2d = false;
+	private boolean f3u = false;
+	private boolean f3d = false;
+	private boolean f4u = false;
+	private boolean f4d = false;
+	private boolean f5d = false;
+	private boolean fStatus[] = new boolean[8];
+	
 	public FloorPanelGUI() {
 		
 		// General Resources
@@ -234,82 +246,111 @@ public class FloorPanelGUI extends JPanel {
 	// sets the floor one up button to on
 	public void setFl1UpOn() {
 		up_one.setIcon(up_btn_on);
+		f1u = true;
 	}
 	
 	// sets the floor one up button to off
 	public void setFl1UpOff() {
 		up_one.setIcon(up_btn);
+		f1u = false;
 	}
 	
 	// sets the floor two up button to on
 	public void setFl2UpOn() {
 		up_two.setIcon(up_btn_on);
+		f2u = true;
 	}
 	
 	// sets the floor two up button to off
 	public void setFl2UpOff() {
 		up_two.setIcon(up_btn);
+		f2u = false;
 	}
 	
 	// sets the floor two down button to on
 	public void setFl2DownOn() {
 		down_two.setIcon(dwn_btn_on);
+		f2d = true;
 	}
 	
 	// sets the floor two down button to off
 	public void setFl2DownOff() {
 		down_two.setIcon(dwn_btn);
+		f2d = false;
 	}
 
 	// sets the floor three up button to on
 	public void setFl3UpOn() {
 		up_three.setIcon(up_btn_on);
+		f3u = true;
 	}
 	
 	// sets the floor three up button to off
 	public void setFl3UpOff() {
 		up_three.setIcon(up_btn);
+		f3u = false;
 	}
 	
 	// sets the floor three down button to on
 	public void setFl3DownOn() {
 		down_three.setIcon(dwn_btn_on);
+		f3d = true;
 	}
 	
 	// sets the floor three down button to off
 	public void setFl3DownOff() {
 		down_three.setIcon(dwn_btn);
+		f3d = false;
 	}
 	// sets the floor four up button to on
 	public void setFl4UpOn() {
 		up_four.setIcon(up_btn_on);
+		f4u = true;
 	}
 	
 	// sets the floor four up button to off
 	public void setFl4UpOff() {
 		up_four.setIcon(up_btn);
+		f4u = false;
 	}
 	
 	// sets the floor four down button to on
 	public void setFl4DownOn() {
 		down_four.setIcon(dwn_btn_on);
+		f4d = true;
 	}
 	
 	// sets the floor four down button to off
 	public void setFl4DownOff() {
 		down_four.setIcon(dwn_btn);
+		f4d = false;
 	}
 	
 	// sets the floor five down button to on
 	public void setFl5DownOn() {
 		down_five.setIcon(dwn_btn_on);
+		f5d = true;
 	}
 	
 	// sets the floor five down button to off
 	public void setFl5DownOff() {
 		down_five.setIcon(dwn_btn);
+		f5d = false;
 	}
 	
+	
+	// gets the current status of all floors
+	public boolean[] getFloorStatus() {
+		fStatus[0] = f1u;
+		fStatus[1] = f2u;
+		fStatus[2] = f2d;
+		fStatus[3] = f3u;
+		fStatus[4] = f3d;
+		fStatus[5] = f4u;
+		fStatus[6] = f4d;
+		fStatus[7] = f5d;
+		return fStatus;
+	}
 	/**
 	 * TODO:
 	 * 	FINISH FUNCTIONS TO UPDATE FLOOR DISPLAYS

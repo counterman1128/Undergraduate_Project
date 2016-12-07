@@ -29,7 +29,7 @@ public class MainDisplay {
 	private static FloorPanelGUI fp;
 	private static CarPanelGUI cp;
 	private static InputPanelGUI ip;
-	//private static ControlSystem cs = new ControlSystem();
+	private static ControlSystem cs = new ControlSystem();
 	private static ElevatorCarPiston daPiston = new ElevatorCarPiston();
 	
 	
@@ -47,12 +47,18 @@ public class MainDisplay {
 				}
 			}
 		});*/
+		
+	/**
+	 * Control Application from here
+	 */
 		MainDisplay window = new MainDisplay();
 		window.frame.setVisible(true);
+		
+		/*
 		for(int i=0;i<26;i++){
 			Thread.sleep(1000);
 			pp.setPiston(i);
-		}
+		}*/
 	}
 
 	/**

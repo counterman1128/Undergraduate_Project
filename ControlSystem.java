@@ -87,6 +87,10 @@ public class ControlSystem {
 		}
 	}
 	
+	public void CarPanelInput(){
+		if(elevatorCar.getNextFloor() != -1)
+			car_panel.add(elevatorCar.getNextFloor());
+	}
 	public PriorityQueue<Floor> return_queue(){
 		return queue;	
 	}

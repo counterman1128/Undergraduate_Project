@@ -159,7 +159,7 @@ public class ControlSystem {
 			piston.movePistonToFloor(5);
 	}
 	
-	public void SystemInputCheck(){
+	public void SystemInputCheck()throws InterruptedException{
 		this.checkForFloorInput();
 		this.speedSafety();
 		this.FireAlarmCheck();

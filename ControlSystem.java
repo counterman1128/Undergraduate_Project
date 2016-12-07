@@ -48,7 +48,7 @@ public class ControlSystem {
 	
 	//Used for comparator class
 	//public enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
-	public Piston object;
+//	public Piston object;
 	public FloorPanelState state;
 	
 	//Floor Objects
@@ -134,7 +134,7 @@ public class ControlSystem {
 	//Opening Floor Door and elevator Door when destination is reached
 	public void door_function()throws InterruptedException{
 		//If elevator is still moving deny call to open door
-		if(piston.getPistonState() != object.STATIONARY){
+		if(piston.getPistonState() != Piston.STATIONARY){
 		
 		//Check floor sensor. If piston position equals floor position then open floor door and elevator door
 		}else if(piston.getCurrentPosition() == piston.getDestinationFloor()){
@@ -165,31 +165,32 @@ public class ControlSystem {
 		this.FireAlarmCheck();
 	}
 	
-	public class ElevatorQueue extends ControlSystem implements Comparator<Floor> {//May have to add function to check postion of floors compared to each other
+	public class ElevatorQueue implements Comparator<Floor> {
+		//May have to add function to check postion of floors compared to each other
 		
 		public int compare(Floor obj1, Floor obj2){
-			if(piston.getPistonState() == object.MOVING_UP){
+			if(piston.getPistonState() == Piston.MOVING_UP){
 				if(obj1.getFloorPanelState() > obj2.getFloorPanelState())
 					return 1;
 				if(obj1.getFloorPanelState() < obj2.getFloorPanelState())  
 					return -1;
-				if(obj1.floorPosition < obj2.floorPosition && obj1.returnPanelStatus() == state.UP && obj1.floorPosition > piston.getCurrentPosition())
+				if(obj1.floorPosition < obj2.floorPosition && obj1.returnPanelStatus() == FloorPanelState.UP && obj1.floorPosition > piston.getCurrentPosition())
 					return 1;
-				else if(obj2.returnPanelStatus() == state.UP && obj2.floorPosition > piston.getCurrentPosition())
+				else if(obj2.returnPanelStatus() == FloorPanelState.UP && obj2.floorPosition > piston.getCurrentPosition())
 					return -1;
 			
 			}
-			if(piston.getPistonState() == object.MOVING_DOWN){
+			if(piston.getPistonState() == Piston.MOVING_DOWN){
 				if(obj1.getFloorPanelState() < obj2.getFloorPanelState())
 					return 1;
 				if(obj1.getFloorPanelState() > obj2.getFloorPanelState())
 					return -1;
-				if(obj1.floorPosition > obj2.floorPosition && obj1.returnPanelStatus() == state.DOWN && obj1.floorPosition < piston.getCurrentPosition())
+				if(obj1.floorPosition > obj2.floorPosition && obj1.returnPanelStatus() == FloorPanelState.DOWN && obj1.floorPosition < piston.getCurrentPosition())
 					return 1;
-				else if(obj2.returnPanelStatus() == state.DOWN && obj2.floorPosition < piston.getCurrentPosition())
+				else if(obj2.returnPanelStatus() == FloorPanelState.DOWN && obj2.floorPosition < piston.getCurrentPosition())
 					return -1;
 			}
-			if(piston.getPistonState() == object.STATIONARY)
+			if(piston.getPistonState() == Piston.STATIONARY)
 				return 1;
 			return 0;
 		}

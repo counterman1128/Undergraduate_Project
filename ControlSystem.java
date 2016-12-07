@@ -122,7 +122,7 @@ public class ControlSystem {
 	public void FireAlarmCheck(){
 		if(alarm.AlarmOn() == true){
 			this.moveToNearestFloor();
-			floor[piston.getCurrentFloor()].setDoorOpen();	
+			floor[piston.getCurrentFloor()].openFloorDoor();	
 		}
 	}
 	

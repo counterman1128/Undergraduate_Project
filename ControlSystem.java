@@ -125,7 +125,7 @@ public class ControlSystem {
 	}
 	
 	public void checkWeight(){
-		if(weight.overWeight() == true)
+		if(weight.overWeight() == true){}
 			//Implement Safety Function here
 	}
 	

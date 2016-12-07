@@ -37,6 +37,7 @@ import Undergraduate_Project.Door;
 import Undergraduate_Project.elevatorLight;
 import Undergraduate_Project.ElevatorFan;
 import Undergraduate_Project.fireAlarm;
+import Undergraduate_Project.ElevatorCarWeightSensor;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -60,6 +61,7 @@ public class ControlSystem {
 	public Comparator<Floor> comparator = new ElevatorQueue();
 	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
 	
+	public ElevatorCarWeightSensor weight = new ElevatorCarWeightSensor();
 	public fireAlarm alarm = new fireAlarm();
 	public ElevatorCar elevatorCar = new ElevatorCar();
 	public ElevatorCarPiston piston = new ElevatorCarPiston(INITIAL_ELEVATOR_FLOOR, NUMBER_OF_FLOORS);
@@ -120,6 +122,11 @@ public class ControlSystem {
 	public void FireAlarmCheck(){
 		if(alarm.AlarmOn() == true)
 			this.moveToNearestFloor();
+	}
+	
+	public void checkWeight(){
+		if(weight.overWeight() == true)
+			//Implement Safety Function here
 	}
 	
 	//Opening Floor Door and elevator Door when destination is reached

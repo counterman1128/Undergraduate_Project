@@ -120,6 +120,9 @@ public class ElevatorCarPiston {
 			piston = object.MOVING_DOWN;
 		else
 			piston = object.STATIONARY;
+		while(currentPosition != floorPosition){
+			this.pistonMove();	
+		}
 	}
 	
 	//Calculates the position of the Piston with respect to time and speed

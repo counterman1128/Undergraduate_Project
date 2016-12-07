@@ -41,12 +41,12 @@ public class MainDisplay {
 	 * Create the application.
 	 */
 	public MainDisplay() {
-		initialize();
+		//initialize();
 	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private static void initialize() {
 
 		// creates main application window
 		frame = new JFrame("Undergrad Elevator Control System");

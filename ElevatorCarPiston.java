@@ -112,6 +112,16 @@ public class ElevatorCarPiston {
 	public double getSpeed(){
 		return elevator_speed;	
 	}
+	
+	public void piston_main(){
+		if(currentPosition < floorPosition)
+			piston = object.MOVING_UP;
+		else if(currentPosition > floorPosition)
+			piston = object.MOVING_DOWN;
+		else
+			piston = object.STATIONARY;
+	}
+	
 	//Calculates the position of the Piston with respect to time and speed
 	public double pistonMove(){	
 		if(piston == object.MOVING_UP){

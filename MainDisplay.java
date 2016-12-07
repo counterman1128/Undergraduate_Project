@@ -13,6 +13,12 @@ import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import java.awt.Image.*;
 
+//Files
+import Undergraduate_Project.CarPanelGUI;
+import Undergraduate_Project.FloorPanelGUI;
+import Undergraduate_Project.PistonPanelGUI;
+import Undergraduate_Project.InputPanelGUI;
+	
 public class MainDisplay {
 
 	private static JFrame frame;

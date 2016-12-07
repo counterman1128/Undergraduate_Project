@@ -52,7 +52,7 @@ public class ControlSystem {
 	public FloorPanelState state;
 	
 	//Floor Objects
-	public Floor []floor;
+	public Floor []floor = new Floor[5];
 	
 	//EM Brake Object
 	public EmergencyBreaks brake = new EmergencyBreaks();

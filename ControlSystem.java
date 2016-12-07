@@ -102,6 +102,10 @@ public class ControlSystem {
 		return piston.getSpeed();
 	}
 	
+	public double getElevatorPosition(){
+		return piston.getCurrentPosition();	
+	}
+	
 	public void speedSafety(){
 		if(piston.getSpeed() > 2.0)
 			this.EM_Brake_Procedure();

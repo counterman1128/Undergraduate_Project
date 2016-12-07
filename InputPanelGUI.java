@@ -5,10 +5,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class InputPanelGUI extends JPanel {
 
@@ -38,6 +41,13 @@ public class InputPanelGUI extends JPanel {
 	private JButton ob_true;
 	private JButton ob_false;
 	
+	private double speedinp;
+	private double posinp;
+	private double weightinp;
+	private boolean maint_status;
+	private boolean smoke_status;
+	private boolean obstru_status;
+	
 	public InputPanelGUI() {
 		
 		title = new JLabel();
@@ -46,26 +56,85 @@ public class InputPanelGUI extends JPanel {
 		chSpeed = new JLabel();
 		speedInput = new JTextField();
 		spdSubmit = new JButton();
+		spdSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				speedinp = Double.parseDouble(getSpeed());
+				System.out.print(speedinp);
+			}
+		});
 
 		chPos = new JLabel();
 		posInput = new JTextField();
 		posSubmit = new JButton();
+		posSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				posinp = Double.parseDouble(getPos());
+				if(posinp < 0 && posinp > 50) {
+					System.out.println("Please enter an integer between 0 and 50");
+				}				
+			}
+		});
 
 		setFire = new JLabel();
 		f_true = new JButton();
+		f_true.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				smoke_status = true;
+			}
+		});
 		f_false = new JButton();
+		f_false.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				smoke_status = false;
+			}
+		});
 
 		maint = new JLabel();
 		m_true = new JButton();
+		m_true.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				maint_status = true;
+			}
+		});
 		m_false = new JButton();
+		m_false.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				maint_status = false;
+			}
+		});
 
 		weight = new JLabel();
 		weightInput = new JTextField();
 		weightSubmit = new JButton();
+		weightSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				weightinp = Double.parseDouble(getWeight());
+				System.out.println(weightinp);
+			}
+		});
 
 		obstruct = new JLabel();
 		ob_true = new JButton();
+		ob_true.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				obstru_status = true;
+			}
+		});
 		ob_false = new JButton();
+		ob_false.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				obstru_status = false;
+			}
+		});
 		
 		setUpInputPanel();
 	}
@@ -151,6 +220,9 @@ public class InputPanelGUI extends JPanel {
 		ob_false.setText("No");
 	}
 	
+	/**
+	 * Private accessors for this class only
+	 */
 	// returns the speed from the text field
 	private String getSpeed() {
 		return speedInput.getText();
@@ -163,4 +235,37 @@ public class InputPanelGUI extends JPanel {
 	private String getPos() {
 		return posInput.getText();
 	}	
+	
+	/**
+	 * Accessors to be used by MainDisplay 
+	 */
+	// returns the value of the speed input
+	public double speedNum() {
+		return speedinp;
+	}
+	
+	// returns the value of the weight input
+	public double weightNum() {
+		return weightinp;
+	}
+	
+	// returns the value of the position input
+	public double posNum() {
+		return posinp;
+	}
+	
+	// returns the status of the smoke/fire alarm
+	public boolean smokeStat() {
+		return smoke_status;
+	}
+	
+	// returns the status of maintenance mode
+	public boolean maintStat() {
+		return maint_status;
+	}
+	
+	// returns whether there is an obstruction or not
+	public boolean obstruStat() {
+		return obstru_status;
+	}
 }

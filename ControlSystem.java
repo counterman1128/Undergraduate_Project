@@ -39,6 +39,7 @@ import Undergraduate_Project.ElevatorFan;
 import Undergraduate_Project.fireAlarm;
 import Undergraduate_Project.ElevatorCarWeightSensor;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 public class ControlSystem {
@@ -60,6 +61,7 @@ public class ControlSystem {
 	//Queue
 	public Comparator<Floor> comparator = new ElevatorQueue();
 	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
+	public ArrayList<ElevatorCarPanel> car_panel = new ArrayList<ElevatorCarPanel>();
 	
 	public ElevatorCarWeightSensor weight = new ElevatorCarWeightSensor();
 	public fireAlarm alarm = new fireAlarm();
@@ -83,6 +85,10 @@ public class ControlSystem {
 			if(floor[i].getFloorPanelState() != 0)
 				queue.add(floor[i]);
 		}
+	}
+	
+	public PriorityQueue<Floor> return_queue(){
+		return queue;	
 	}
 	
 	public void removeFloorFromQueue(Floor obj){

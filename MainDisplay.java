@@ -15,7 +15,7 @@ import java.awt.Image.*;
 
 public class MainDisplay {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private static PistonPanelGUI pp;
 	private static FloorPanelGUI fp;
 	private static CarPanelGUI cp;

@@ -67,10 +67,37 @@ public class ControlSystem {
 	public fireAlarm alarm = new fireAlarm();
 	public ElevatorCar elevatorCar = new ElevatorCar();
 	public ElevatorCarPiston piston = new ElevatorCarPiston(INITIAL_ELEVATOR_FLOOR, NUMBER_OF_FLOORS);
- 	ControlSystem(){
+ 	
+	ControlSystem(){
 		for(int i = 0; i < NUMBER_OF_FLOORS; i++)
 			floor[i] = new Floor(i);	
 	}
+ 	
+	ControlSystem(PistonPanelGUI pp, FloorPanelGUI fp,CarPanelGUI cp,InputPanelGUI ip) throws InterruptedException {
+ 		this.pp = pp;
+ 		this.fp = fp;
+ 		this.cp = cp;
+ 		this.ip = ip;
+		for(int i = 0; i < NUMBER_OF_FLOORS; i++)
+			floor[i] = new Floor(i);
+		while (true) {
+			Thread.sleep(50);
+			run();
+		}
+ 	}
+	
+	/* Used to run the checking of all the states of the elevator
+	 * 
+	 * 
+	 */
+	public void run() {
+ 		checkForFloorInput();
+ 		cp.doorOpen();
+ 	}
+	
+ 	
+ 	
+ 	
 	/*
 	 * Develop function to receive calls from Floor Panels. Then push the floor
 	 * object to the queue.
@@ -81,9 +108,14 @@ public class ControlSystem {
 	 * 	Always add the next highest or lowest floor first. 
 	 */
 	public void checkForFloorInput(){
+		boolean floor_buttons[] = new boolean[5];
+		floor_buttons = cp.getButtonsPressed();
+		
 		for(int i = 0; i < NUMBER_OF_FLOORS; i++){
-			if(floor[i].getFloorPanelState() != 0)
+			if(floor_buttons[i] == true) {
 				queue.add(floor[i]);
+				cp.flOn(i);
+			}
 		}
 	}
 	

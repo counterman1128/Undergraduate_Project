@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
+
 public class PistonPanelGUI extends JPanel {
 
 	// object declarations
@@ -34,6 +35,8 @@ public class PistonPanelGUI extends JPanel {
 	private ImageIcon piston_23;
 	private ImageIcon piston_24;
 	private ImageIcon piston_25;
+	
+	//public MainDisplay md = new MainDisplay();
 	
 	
 	// default constructor
@@ -83,6 +86,62 @@ public class PistonPanelGUI extends JPanel {
 		setLayout(null);
 		this.add(piston);
 		setPiston0();
+	}
+	
+	public void piston_main(double x){
+		double value = 1.6;
+		if(x == 0)
+			setPiston0();
+		if(x <= value)
+			setPiston1();
+		else if(x <= value*2)
+			setPiston2();
+		else if(x <= value*3)
+			setPiston3();
+		else if(x <= value*4)
+			setPiston4();
+		else if(x <= value*5)
+			setPiston5();
+		else if(x <= value*6)
+			setPiston6();
+		else if(x <= value*7)
+			setPiston7();
+		else if(x <= value*8)
+			setPiston8();
+		else if(x <= value*9)
+			setPiston9();
+		else if(x <= value*10)
+			setPiston10();
+		else if(x <= value*11)
+			setPiston11();
+		else if(x <= value*12)
+			setPiston12();
+		else if(x <= value*13)
+			setPiston13();
+		else if(x <= value*14)
+			setPiston14();
+		else if(x <= value*15)
+			setPiston15();
+		else if(x <= value*16)
+			setPiston16();
+		else if(x <= value*17)
+			setPiston17();
+		else if(x <= value*18)
+			setPiston18();
+		else if(x <= value*19)
+			setPiston19();
+		else if(x <= value*20)
+			setPiston20();
+		else if(x <= value*21)
+			setPiston21();
+		else if(x <= value*22)
+			setPiston22();
+		else if(x <= value*23)
+			setPiston23();
+		else if(x <= value*24)
+			setPiston24();
+		else if(x <= 40)
+			setPiston25();
 	}
 	
 	public void setPiston(int level) {

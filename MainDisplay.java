@@ -20,7 +20,7 @@ import Undergraduate_Project.FloorPanelGUI;
 import Undergraduate_Project.PistonPanelGUI;
 import Undergraduate_Project.InputPanelGUI;
 import Undergraduate_Project.ControlSystem;
-import Undergraduate_Project.ElevatorCarPiston;
+//import Undergraduate_Project.ElevatorCarPiston;
 
 public class MainDisplay {
 
@@ -30,7 +30,7 @@ public class MainDisplay {
 	private static CarPanelGUI cp;
 	private static InputPanelGUI ip;
 	private static ControlSystem cs = new ControlSystem();
-	private static ElevatorCarPiston daPiston = new ElevatorCarPiston();
+	//private static ElevatorCarPiston daPiston = new ElevatorCarPiston();
 	
 	
 	/**
@@ -53,6 +53,11 @@ public class MainDisplay {
 	 */
 		MainDisplay window = new MainDisplay();
 		window.frame.setVisible(true);
+		for(double x = 0; x<41;x=x+1.6){//This is for a test. Use a while loop when running full program
+			Thread.sleep(1000);
+			pp.piston_main(x);
+			System.out.println(x);
+		}
 		
 		/*
 		for(int i=0;i<26;i++){
@@ -96,4 +101,9 @@ public class MainDisplay {
 		ip.setLocation(953, 13);
 		frame.getContentPane().add(ip);
 	}
+	
+	public double piston_pos(){
+		return cs.getElevatorPosition();
+	}
+	
 }

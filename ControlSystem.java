@@ -29,23 +29,23 @@
   	public class ElevatorQueue extends ControlSystem implements Comparator<Floor>{}
 */
 package Undergraduate_Project;
-import Undergraduate_Project.Floor;
-import Undergraduate_Project.Piston;
-import Undergraduate_Project.FloorPanelState;
-import Undergraduate_Project.EmergencyBreaks;
-import Undergraduate_Project.Door;
-import Undergraduate_Project.elevatorLight;
-import Undergraduate_Project.ElevatorFan;
-import Undergraduate_Project.fireAlarm;
-import Undergraduate_Project.ElevatorCarWeightSensor;
+import Undergraduate_Project.*;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+import java.awt.event.ActionEvent;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 public class ControlSystem {
+	
+	private PistonPanelGUI pp;
+	private FloorPanelGUI fp;
+	private CarPanelGUI cp;
+	private InputPanelGUI ip;
+	
 	private final int NUMBER_OF_FLOORS = 5;
 	private final int INITIAL_ELEVATOR_FLOOR = 1;
-	private static boolean DOOR_OPEN;
+//	private static boolean DOOR_OPEN;
 	
 	//Used for comparator class
 	//public enum Piston{MOVING_UP, STATIONARY, MOVING_DOWN}
@@ -61,19 +61,19 @@ public class ControlSystem {
 	//Queue
 	public Comparator<Floor> comparator = new ElevatorQueue();
 	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
-	public ArrayList<Integer> car_panel = new ArrayList<Integer>();
 	
 	public ElevatorCarWeightSensor weight = new ElevatorCarWeightSensor();
 	public fireAlarm alarm = new fireAlarm();
 	public ElevatorCar elevatorCar = new ElevatorCar();
 	public ElevatorCarPiston piston = new ElevatorCarPiston(INITIAL_ELEVATOR_FLOOR, NUMBER_OF_FLOORS);
- 	
-	ControlSystem(){
+	
+ 	ControlSystem(){
 		for(int i = 0; i < NUMBER_OF_FLOORS; i++)
 			floor[i] = new Floor(i);	
+		run();
 	}
- 	
-	ControlSystem(PistonPanelGUI pp, FloorPanelGUI fp,CarPanelGUI cp,InputPanelGUI ip) throws InterruptedException {
+
+ 	ControlSystem(PistonPanelGUI pp, FloorPanelGUI fp,CarPanelGUI cp,InputPanelGUI ip) throws InterruptedException {
  		this.pp = pp;
  		this.fp = fp;
  		this.cp = cp;
@@ -85,17 +85,12 @@ public class ControlSystem {
 			run();
 		}
  	}
-	
-	/* Used to run the checking of all the states of the elevator
-	 * 
-	 * 
-	 */
-	public void run() {
+ 	
+ 	public void run() {
+ 		
  		checkForFloorInput();
  		cp.doorOpen();
  	}
-	
- 	
  	
  	
 	/*
@@ -108,6 +103,7 @@ public class ControlSystem {
 	 * 	Always add the next highest or lowest floor first. 
 	 */
 	public void checkForFloorInput(){
+		
 		boolean floor_buttons[] = new boolean[5];
 		floor_buttons = cp.getButtonsPressed();
 		
@@ -117,14 +113,6 @@ public class ControlSystem {
 				cp.flOn(i);
 			}
 		}
-	}
-	
-	public void CarPanelInput(){
-		if(elevatorCar.getPanelCall() != -1)
-			car_panel.add(elevatorCar.getPanelCall());
-	}
-	public PriorityQueue<Floor> return_queue(){
-		return queue;	
 	}
 	
 	public void removeFloorFromQueue(Floor obj){
@@ -137,15 +125,11 @@ public class ControlSystem {
 	
 	int moveToFloor(int targetFloor) {
 		int currentFloor = piston.movePistonToFloor(targetFloor);
-		return currentFloor;
+		return currentFloor; // Current floor
 	}
 	
 	public double getElevatorSpeed(){
 		return piston.getSpeed();
-	}
-	
-	public double getElevatorPosition(){
-		return piston.getCurrentPosition();	
 	}
 	
 	public void speedSafety(){
@@ -165,7 +149,7 @@ public class ControlSystem {
 		piston.resetSpeed();
 	}
 	
-	public void FireAlarmCheck()throws InterruptedException{
+	public void FireAlarmCheck() throws InterruptedException{
 		if(alarm.AlarmOn() == true){
 			this.moveToNearestFloor();
 			floor[piston.getCurrentFloor()].openFloorDoor();	
@@ -243,4 +227,3 @@ public class ControlSystem {
 	}
 
 }
-

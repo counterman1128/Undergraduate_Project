@@ -2,6 +2,7 @@ package Undergraduate_Project;
 
 import java.awt.Color;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,6 +12,8 @@ import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.concurrent.TimeUnit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CarPanelGUI extends JPanel {
 
@@ -54,53 +57,107 @@ public class CarPanelGUI extends JPanel {
 	private ImageIcon fan_on;
 	private ImageIcon speaker_img;
 	
+	private boolean buttons_pressed[] = new boolean[5];
 	
+	public JButton floor_buttons[] = new JButton[5];
 	
 	public CarPanelGUI() {
-		
+				
 		// load objects
 		floor1 = new JButton();
+		floor1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				buttons_pressed[0] = true;
+			}
+		});
 		floor2 = new JButton();
+		floor2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				buttons_pressed[1] = true;
+			}
+		});
 		floor3 = new JButton();
+		floor3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				buttons_pressed[2] = true;
+			}
+		});
 		floor4 = new JButton();
+		floor4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				buttons_pressed[3] = true;
+			}
+		});
 		floor5 = new JButton();
-		open_door = new JButton();
+		floor5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				buttons_pressed[4] = true;
+			}
+		});
+		
+		// Sets an array with the states of each floor button
+		for (int i = 0; i < 5; i++){
+			buttons_pressed[i] = false;
+		}
+		
+		// Fills an array with all the buttons for the floors
+		floor_buttons[0] = floor1;
+		floor_buttons[1] = floor2;
+		floor_buttons[2] = floor3;
+		floor_buttons[3] = floor4;
+		floor_buttons[4] = floor5;
+
+		open_door  = new JButton();
 		close_door = new JButton();
 		maint = new JButton();
 		emerg = new JButton();
-		fan = new JLabel();
+		fan   = new JLabel();
 		speaker = new JLabel();
 		ele_bg = new JLabel();
 		
 		// load image resources for buttons
-		fl_1_btn = new ImageIcon(getClass().getResource("/resources/button1OFF.jpg"));
-		fl_2_btn = new ImageIcon(getClass().getResource("/resources/button2OFF.jpg"));
-		fl_3_btn = new ImageIcon(getClass().getResource("/resources/button3OFF.jpg"));
-		fl_4_btn = new ImageIcon(getClass().getResource("/resources/button4OFF.jpg"));
-		fl_5_btn = new ImageIcon(getClass().getResource("/resources/button5OFF.jpg"));
-		fl_1_btn_on = new ImageIcon(getClass().getResource("/resources/button1ON.jpg"));
-		fl_2_btn_on = new ImageIcon(getClass().getResource("/resources/button2ON.jpg"));
-		fl_3_btn_on = new ImageIcon(getClass().getResource("/resources/button3ON.jpg"));
-		fl_4_btn_on = new ImageIcon(getClass().getResource("/resources/button4ON.jpg"));
-		fl_5_btn_on = new ImageIcon(getClass().getResource("/resources/button5ON.jpg"));
-		door_close_btn = new ImageIcon(getClass().getResource("/resources/buttonCarCloseDoorOFF.jpg"));
+		fl_1_btn 		= new ImageIcon(getClass().getResource("/resources/button1OFF.jpg"));
+		fl_2_btn 		= new ImageIcon(getClass().getResource("/resources/button2OFF.jpg"));
+		fl_3_btn 		= new ImageIcon(getClass().getResource("/resources/button3OFF.jpg"));
+		fl_4_btn 		= new ImageIcon(getClass().getResource("/resources/button4OFF.jpg"));
+		fl_5_btn 		= new ImageIcon(getClass().getResource("/resources/button5OFF.jpg"));
+		fl_1_btn_on 	= new ImageIcon(getClass().getResource("/resources/button1ON.jpg"));
+		fl_2_btn_on 	= new ImageIcon(getClass().getResource("/resources/button2ON.jpg"));
+		fl_3_btn_on	 	= new ImageIcon(getClass().getResource("/resources/button3ON.jpg"));
+		fl_4_btn_on 	= new ImageIcon(getClass().getResource("/resources/button4ON.jpg"));
+		fl_5_btn_on 	= new ImageIcon(getClass().getResource("/resources/button5ON.jpg"));
+		door_close_btn 	= new ImageIcon(getClass().getResource("/resources/buttonCarCloseDoorOFF.jpg"));
 		door_close_btn_on = new ImageIcon(getClass().getResource("/resources/buttonCarDoorCloseON.jpg"));
-		door_open_btn = new ImageIcon(getClass().getResource("/resources/buttonCarOpenDoorOFF.jpg"));
-		door_open_btn_on = new ImageIcon(getClass().getResource("/resources/buttonCarDoorOpenON.jpg"));
-		maint_btn = new ImageIcon(getClass().getResource("/resources/buttonKeyHole.jpg"));
-		maint_turned = new ImageIcon(getClass().getResource("/resources/buttonKeyHoleClockwise.jpg"));
-		emerg_btn = new ImageIcon(getClass().getResource("/resources/buttonAlarm.jpg"));
+		door_open_btn 	= new ImageIcon(getClass().getResource("/resources/buttonCarOpenDoorOFF.jpg"));
+		door_open_btn_on= new ImageIcon(getClass().getResource("/resources/buttonCarDoorOpenON.jpg"));
+		maint_btn 		= new ImageIcon(getClass().getResource("/resources/buttonKeyHole.jpg"));
+		maint_turned 	= new ImageIcon(getClass().getResource("/resources/buttonKeyHoleClockwise.jpg"));
+		emerg_btn 		= new ImageIcon(getClass().getResource("/resources/buttonAlarm.jpg"));
 		
 		// load image resources for main elevator background and accessories
-		main_bg_closed = new ImageIcon(getClass().getResource("/resources/ElevatorCar.png"));
-		main_bg_open = new ImageIcon(getClass().getResource("/resources/CarDoorOpen5.png"));
-		main_bg_emerg = new ImageIcon(getClass().getResource("/resources/alarm.gif"));
+		main_bg_closed 	= new ImageIcon(getClass().getResource("/resources/ElevatorCar.png"));
+		main_bg_open 	= new ImageIcon(getClass().getResource("/resources/CarDoorOpen5.png"));
+		main_bg_emerg 	= new ImageIcon(getClass().getResource("/resources/alarm.gif"));
 		main_bg_opening = new ImageIcon(getClass().getResource("/resources/carDoorOpen.gif"));
 		main_bg_closing = new ImageIcon(getClass().getResource("/resources/carDoorClose.gif"));
-		fan_img = new ImageIcon(getClass().getResource("/resources/fanOff.png"));
-		fan_on = new ImageIcon(getClass().getResource("/resources/fanOn.gif"));
+		fan_img 		= new ImageIcon(getClass().getResource("/resources/fanOff.png"));
+		fan_on 			= new ImageIcon(getClass().getResource("/resources/fanOn.gif"));
 		
 		setupCarPanel();
+	}
+	
+	public boolean[] getButtonsPressed() {
+		return buttons_pressed;
 	}
 	
 	private void setupCarPanel() {
@@ -179,6 +236,29 @@ public class CarPanelGUI extends JPanel {
 		ele_bg.setIcon(main_bg_closing);
 	}
 	
+	
+	// turn on the image for each button	
+	public void flOn(int f){
+		int corrected_floor = f + 1; // Makes the correction for the floor
+		String p1 = "/resources/button";
+		String p2 = Integer.toString(corrected_floor); 
+ 		String p3 = "ON.jpg";
+ 		String source = p1.concat(p2).concat(p3);
+ 		Icon sourceIcon = new ImageIcon(getClass().getResource(source));
+		floor_buttons[f].setIcon(sourceIcon);
+	}
+	
+	// turn off the image for each button
+	public void flOff(int f){
+		int corrected_floor = f + 1; // Makes the correction for the floor
+		String p1 = "/resources/button";
+		String p2 = Integer.toString(corrected_floor); 
+ 		String p3 = "OFF.jpg";
+ 		String source = p1.concat(p2).concat(p3);
+ 		Icon sourceIcon = new ImageIcon(getClass().getResource(source));
+		floor_buttons[f].setIcon(sourceIcon);
+	}
+	
 	// changes the floor 1 button to the on image
 	public void fl1On() {
 		floor1.setIcon(fl_1_btn_on);
@@ -233,7 +313,7 @@ public class CarPanelGUI extends JPanel {
 	public void doorOpenOff() {
 		open_door.setIcon(door_open_btn);
 	}
-	
+	 
 	// changes the open door button to the on image
 	public void doorOpenOn() {
 		open_door.setIcon(door_open_btn_on);

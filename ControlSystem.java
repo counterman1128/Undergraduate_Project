@@ -61,7 +61,7 @@ public class ControlSystem {
 	//Queue
 	public Comparator<Floor> comparator = new ElevatorQueue();
 	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
-	public ArrayList<ElevatorCarPanel> car_panel = new ArrayList<ElevatorCarPanel>();
+	public ArrayList<Integer> car_panel = new ArrayList<Integer>();
 	
 	public ElevatorCarWeightSensor weight = new ElevatorCarWeightSensor();
 	public fireAlarm alarm = new fireAlarm();

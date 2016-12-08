@@ -50,6 +50,8 @@ public class MainDisplay {
 	/**
 	 * Control Application from here
 	 */
+		// Gary modified  Dec 8 16:01// 
+		ControlSystem controlSystem = new ControlSystem(pp, fp, cp, ip);
 		MainDisplay window = new MainDisplay();
 		window.frame.setVisible(true);
 		for(double x = 0; x<41;x=x+1.6){//This is for a test. Use a while loop when running full program

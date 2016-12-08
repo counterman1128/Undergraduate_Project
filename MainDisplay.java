@@ -20,7 +20,6 @@ import Undergraduate_Project.FloorPanelGUI;
 import Undergraduate_Project.PistonPanelGUI;
 import Undergraduate_Project.InputPanelGUI;
 import Undergraduate_Project.ControlSystem;
-//import Undergraduate_Project.ElevatorCarPiston;
 
 public class MainDisplay {
 

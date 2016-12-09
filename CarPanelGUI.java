@@ -1,3 +1,5 @@
+
+
 package Undergraduate_Project;
 
 import java.awt.Color;
@@ -16,7 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class CarPanelGUI extends JPanel {
-
+	
 	private JLabel ele_bg;
 	private JButton floor1;
 	private JButton floor2;
@@ -58,6 +60,10 @@ public class CarPanelGUI extends JPanel {
 	private ImageIcon speaker_img;
 	
 	private boolean buttons_pressed[] = new boolean[5];
+	
+	// false = door closed, true = door open
+	private boolean doorStatus = false;
+	private boolean alarmStatus = false;
 	
 	public JButton floor_buttons[] = new JButton[5];
 	
@@ -118,9 +124,36 @@ public class CarPanelGUI extends JPanel {
 		floor_buttons[4] = floor5;
 
 		open_door  = new JButton();
+		open_door.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(getDoorStatus() == false) {
+					doorOpenGif();
+				}
+			}
+		});
 		close_door = new JButton();
+		close_door.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(getDoorStatus() == true) {
+					doorCloseGif();
+				}
+			}
+		});
 		maint = new JButton();
 		emerg = new JButton();
+		emerg.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(alarmStatus == false) {
+					startAlarmMode();
+				}
+				else {
+					endAlarmMode();
+				}
+			}
+		});
 		fan   = new JLabel();
 		speaker = new JLabel();
 		ele_bg = new JLabel();
@@ -214,26 +247,36 @@ public class CarPanelGUI extends JPanel {
 	// changes the ele_bg icon to the alarm bg
 	public void startAlarmMode() {
 		ele_bg.setIcon(main_bg_emerg);
+		alarmStatus = true;
+	}
+	
+	public void endAlarmMode() {
+		ele_bg.setIcon(main_bg_closed);
+		alarmStatus = false;
 	}
 	
 	// set the ele_bg icon to be closed
 	public void doorClosed() {
 		ele_bg.setIcon(main_bg_closed);
+		doorStatus = false;
 	}
 	
 	// set the ele_bg icon to be open
 	public void doorOpen() {
 		ele_bg.setIcon(main_bg_open);
+		doorStatus = true;
 	}
 
 	// plays the gif of the door opening
 	public void doorOpenGif() {
 		ele_bg.setIcon(main_bg_opening);
+		doorStatus = true;
 	}
 	
 	// plays the gif of the door closing
 	public void doorCloseGif() {
 		ele_bg.setIcon(main_bg_closing);
+		doorStatus = false;
 	}
 	
 	
@@ -348,6 +391,9 @@ public class CarPanelGUI extends JPanel {
 		fan.setIcon(fan_img);
 	}
 	
+	private boolean getDoorStatus() {
+		return doorStatus;
+	}
 	/**
 	 * TODO:
 	 * 	FINISH FUNCTION TO UPDATE THE CAR DISPLAY
@@ -358,3 +404,4 @@ public class CarPanelGUI extends JPanel {
 		
 	}
 }
+

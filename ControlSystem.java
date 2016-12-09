@@ -102,10 +102,13 @@ public class ControlSystem {
  		this.SystemInputCheck();
  		
  		if(queue.size() != 0){
- 			//piston.setDestinationFloor(queue.poll().getFloorNumber());
- 			piston.setDestinationFloor(car_panel.get(0));
+ 			piston.setDestinationFloor(queue.poll().getFloorNumber());
+ 			//piston.setDestinationFloor(car_panel.get(0));
  		}
  		piston.piston_main();
+ 		if(piston.getCurrentPosition() == piston.getFloorPosition()){
+ 			//car_panel.remove(0);
+ 		}
  	}
 	
  	

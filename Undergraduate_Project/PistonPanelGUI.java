@@ -88,11 +88,11 @@ public class PistonPanelGUI extends JPanel {
 		setPiston0();
 	}
 	
-	public void piston_main(double x){
+	public void piston_rep(double x){
 		double value = 1.6;
 		if(x == 0)
 			setPiston0();
-		if(x <= value)
+		else if(x <= value)
 			setPiston1();
 		else if(x <= value*2)
 			setPiston2();

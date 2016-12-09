@@ -102,7 +102,8 @@ public class ControlSystem {
  		this.SystemInputCheck();
  		
  		if(queue.size() != 0){
- 			piston.setDestinationFloor(queue.poll().getFloorNumber());
+ 			//piston.setDestinationFloor(queue.poll().getFloorNumber());
+ 			piston.setDestinationFloor(car_panel.get(0));
  		}
  		piston.piston_main();
  	}
@@ -126,6 +127,7 @@ public class ControlSystem {
 		for(int i = 0; i < NUMBER_OF_FLOORS; i++){
 			if(floor_buttons[i] == true) {
 				queue.add(floor[i]);
+				car_panel.add(floor[i].getFloorNumber());
 				cp.flOn(i);
 			}
 		}

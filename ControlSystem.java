@@ -1,5 +1,5 @@
 package Undergraduate_Project;
-/* Class Variables
+/* Class Variables changes
 private final int NUMBER_OF_FLOORS = 5;
 private final int INITIAL_ELEVATOR_FLOOR = 1;
 private static boolean DOOR_OPEN;

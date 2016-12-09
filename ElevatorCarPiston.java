@@ -61,7 +61,7 @@ public class ElevatorCarPiston {
 	
 	public void setDestinationFloor(int floor) {
 		destinationFloor = floor+1;
-		System.out.println("Destination Floor: "+destinationFloor);
+		//System.out.println("Destination Floor: "+destinationFloor);
 		floorPosition = destinationFloor *10.0 - 10;
 	}
 	
@@ -116,7 +116,7 @@ public class ElevatorCarPiston {
 	}
 	
 	public void piston_main() throws InterruptedException{
-		System.out.println("CP: "+currentPosition+"FP: "+floorPosition);
+		//System.out.println("CP: "+currentPosition+"FP: "+floorPosition);
 		//System.out.println(time_sec());
 		if(currentPosition < floorPosition){
 			piston = object.MOVING_UP;
@@ -125,7 +125,7 @@ public class ElevatorCarPiston {
 			up_time = time_sec();
 			down_time = time_sec();
 			this.pistonMove();
-			System.out.println("Position: "+currentPosition);
+			//System.out.println("Position: "+currentPosition);
 		}
 			
 		else if(currentPosition > floorPosition){
@@ -152,7 +152,7 @@ public class ElevatorCarPiston {
 			//System.out.println("moving up");
 			up_time = time_sec();
 			//up_time++
-			System.out.println(time_sec());
+			//System.out.println(time_sec());
 			currentPosition = currentPosition + elevator_speed * Math.abs((up_time - down_time));
 		}else if(piston == object.MOVING_DOWN){
 			down_time = time_sec();

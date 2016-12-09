@@ -100,12 +100,9 @@ public class ControlSystem {
 	 */
 	public void run() throws InterruptedException{//Cant seem to clear element from the queue
  		this.SystemInputCheck();
- 		//System.out.println("size" +queue.size());
+ 		
  		if(queue.size() != 0){
- 			//System.out.println("Floor: "+(queue.peek().getFloorNumber()+1));
  			piston.setDestinationFloor(queue.poll().getFloorNumber());
- 			//System.out.println("Position: "+piston.getFloorPosition());
- 			//queue = null;
  		}
  		piston.piston_main();
  	}

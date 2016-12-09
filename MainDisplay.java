@@ -1,5 +1,5 @@
 package Undergraduate_Project;
-
+//This is a test change_2
 import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,11 +20,7 @@ import Undergraduate_Project.FloorPanelGUI;
 import Undergraduate_Project.PistonPanelGUI;
 import Undergraduate_Project.InputPanelGUI;
 import Undergraduate_Project.ControlSystem;
-import Undergraduate_Project.ElevatorCarPiston;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 public class MainDisplay {
 
@@ -33,17 +29,52 @@ public class MainDisplay {
 	private static FloorPanelGUI fp;
 	private static CarPanelGUI cp;
 	private static InputPanelGUI ip;
-
-	 
+	//private static ControlSystem cs = new ControlSystem();
+	//private static ElevatorCarPiston daPiston = new ElevatorCarPiston();
+	private static ControlSystem cs;
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) throws InterruptedException{
+		/*EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainDisplay window = new MainDisplay();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});*/
+		
+	/**
+	 * Control Application from here
+	 */
+		// Gary modified  Dec 8 16:01// 
 		MainDisplay window = new MainDisplay();
 		window.frame.setVisible(true);
-		ControlSystem controlSystem = new ControlSystem(pp, fp, cp, ip);
-		pp.setLayout(new CardLayout(0, 0));
-
+		Thread t = new Thread((Runnable) cs);
+				t.start();
+		cs = new ControlSystem(pp, fp, cp, ip);
+		
+		
+		/*for(double x = 0; x<41;x=x+1.6){//This is for a test. Use a while loop when running full program
+			Thread.sleep(1000);
+			pp.piston_main(x);
+			System.out.println(x);
+		}*/
+		while(true){
+			cs.run(); 
+			System.out.println();
+			pp.piston_rep(cs.getElevatorPosition());
+		}
+		
+		/*
+		for(int i=0;i<26;i++){
+			Thread.sleep(1000);
+			pp.setPiston(i);
+		}*/
 	}
 
 	/**
@@ -55,7 +86,7 @@ public class MainDisplay {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public void initialize() {
+	private void initialize() {
 
 		// creates main application window
 		frame = new JFrame("Undergrad Elevator Control System");
@@ -65,17 +96,7 @@ public class MainDisplay {
 		
 		// creates the beginning piston panel
 		pp = new PistonPanelGUI();
-		pp.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Piston Clicked");
-
-			}
-		});
-
-		pp.setLocation(10, 13);
 		frame.getContentPane().add(pp);
-		
 		
 		// creates the beginning floor panel
 		fp = new FloorPanelGUI();
@@ -83,17 +104,17 @@ public class MainDisplay {
 		
 		// creates the beginning elevator car panel
 		cp = new CarPanelGUI();
-		cp.setLocation(459, 23);
 		frame.getContentPane().add(cp);
 		
-	
 		// creates the beginning test input panel
 		ip = new InputPanelGUI();
 		ip.setSize(207, 695);
 		ip.setLocation(953, 13);
 		frame.getContentPane().add(ip);
 	}
-	public CarPanelGUI getCp() {
-		return cp;
-	}
+	
+	/*public double piston_pos(){
+		return controlSystem.getElevatorPosition();
+	}*/
+	
 }

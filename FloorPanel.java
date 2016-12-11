@@ -20,9 +20,9 @@ public class FloorPanel {
 		return downButtonPressed;
 	}
 	
-	void setUpButtonPressed(Boolean newState) {
+	public void setUpButtonPressed(boolean newState) {
 		upButtonPressed = newState;
-		downButtonPressed = !newState;
+		downButtonPressed = false;
 		if(newState)
 			panel = state.UP;
 		else
@@ -31,11 +31,14 @@ public class FloorPanel {
 	
 	void setDownButtonPressed(Boolean newState) {
 		downButtonPressed = newState;
-		upButtonPressed = !newState;
-		if(newState)
+		upButtonPressed = false;
+		if(newState){
 			panel = state.DOWN;
-		else
+		}
+		else{
+			
 			panel = state.UP;
+		}
 	}
 	
 	public Object getPanelState(){

@@ -1,6 +1,9 @@
 package Undergraduate_Project;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
@@ -120,6 +123,83 @@ public class FloorPanelGUI extends JPanel {
 		floor_num_1 = new ImageIcon(getClass().getResource("/resources/floor_num_1.png"));
 		
 		setupFloorPanel();
+		floorClickResponse();
+	}
+	
+	public void floorClickResponse(){
+		//up_one = new JButton();
+		up_one.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				setFl1UpOn();
+			}
+		});
+		
+		up_two.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				setFl2UpOn();
+			}
+		});
+		
+		down_two.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				setFl2DownOn();
+			}
+		});
+		
+		up_three.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				setFl3UpOn();
+			}
+		});
+		
+		down_three.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				setFl3DownOn();
+			}
+		});
+		
+		up_four.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				setFl4UpOn();
+			}
+		});
+		
+		down_four.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				setFl4DownOn();
+			}
+		});
+		
+		down_five.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+				setFl5DownOn();
+			}
+		});
+	}
+	public void panel_off(int f){
+			int corrected_floor = f + 1; // Makes the correction for the floor
+			String p1 = "/resources/button";
+			String p2 = Integer.toString(corrected_floor); 
+	 		String p3 = "ON.jpg";
+	 		String source = p1.concat(p2).concat(p3);
+	 		Icon sourceIcon = new ImageIcon(getClass().getResource(source));
+		//	floor_buttons[f].setIcon(sourceIcon); rename!
 	}
 	
 	private void setupFloorPanel() {

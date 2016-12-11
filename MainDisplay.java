@@ -112,9 +112,4 @@ public class MainDisplay {
 		ip.setLocation(953, 13);
 		frame.getContentPane().add(ip);
 	}
-	
-	/*public double piston_pos(){
-		return controlSystem.getElevatorPosition();
-	}*/
-	
 }

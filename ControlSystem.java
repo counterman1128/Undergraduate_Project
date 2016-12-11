@@ -30,6 +30,7 @@ Sub Class
 	public class ElevatorQueue extends ControlSystem implements Comparator<Floor>{}
 */
 import Undergraduate_Project.Floor;
+import Undergraduate_Project.FloorPanel;
 import Undergraduate_Project.Piston;
 import Undergraduate_Project.FloorPanelState;
 import Undergraduate_Project.EmergencyBreaks;
@@ -42,7 +43,9 @@ import Undergraduate_Project.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.lang.Comparable;
 import java.util.PriorityQueue;
+//import java.util.Queue;
 public class ControlSystem {
 	private final int NUMBER_OF_FLOORS = 5;
 	private final int INITIAL_ELEVATOR_FLOOR = 1;
@@ -54,15 +57,16 @@ public class ControlSystem {
 	public FloorPanelState state;
 	
 	//Floor Objects
-	public Floor []floor = new Floor[5];
+	public Floor[] floor = new Floor[5];
 	
 	//EM Brake Object
 	public EmergencyBreaks brake = new EmergencyBreaks();
 	
 	//Queue
-	public Comparator<Floor> comparator = new ElevatorQueue();
-	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(5, comparator);
-	public ArrayList<Integer> car_panel = new ArrayList<Integer>();
+	public Comparator<Floor> comparable = new ElevatorQueue();
+	public PriorityQueue<Floor> queue = new PriorityQueue<Floor>(10,comparable);
+	public ArrayList<Integer> car_panel = new ArrayList<Integer>(5);
+	public int previous = 0;
 	
 	public ElevatorCarWeightSensor weight = new ElevatorCarWeightSensor();
 	public fireAlarm alarm = new fireAlarm();
@@ -100,16 +104,59 @@ public class ControlSystem {
 	 */
 	public void run() throws InterruptedException{//Cant seem to clear element from the queue
  		this.SystemInputCheck();
+ 	
+ 		//Need to add piston state check to accurately stop at floors. Priority Queue doesnt seem to sort
+ 		if(car_panel.size() != 0 && piston.getCurrentFloor() == piston.getDestinationFloor()){
+ 			previous = car_panel.get(0);
+ 			piston.setDestinationFloor(car_panel.get(0));
+ 			if(piston.getCurrentFloor() == piston.getDestinationFloor()){
+ 				cp.flOff(piston.getDestinationFloor()-1);
+ 				car_panel.remove(0);
+ 				car_panel.trimToSize();
+ 			}
+ 		}else if(queue.size() != 0 && piston.getCurrentFloor() == piston.getDestinationFloor()){
+ 			previous = queue.peek().getFloorNumber();
+ 			piston.setDestinationFloor(queue.peek().getFloorNumber());
+ 			System.out.println("Removed obj: "+queue.peek().getFloorNumber()+" "+queue.remove(queue.peek()));
+ 			if(piston.getCurrentFloor() == piston.getDestinationFloor())
+ 				queue.remove(queue.peek());
+ 		}else if(car_panel.size() !=0){
+ 			if(car_panel.get(0) == piston.getCurrentFloor() /*&& piston.getCurrentFloor() != piston.getDestinationFloor()*/){
+ 				piston.setDestinationFloor(car_panel.get(0));
+ 				if(piston.getDestinationFloor() == piston.getCurrentFloor()){
+ 					cp.flOff(piston.getDestinationFloor()-1);
+ 					car_panel.remove(0);
+ 	 				car_panel.trimToSize();
+ 	 				piston.setDestinationFloor(previous);
+ 				}
+ 			}
  		
- 		if(queue.size() != 0){
- 			piston.setDestinationFloor(queue.poll().getFloorNumber());
- 			//piston.setDestinationFloor(car_panel.get(0));
+ 		}else if(queue.size() != 0){
+ 			if(queue.peek().getFloorNumber() == piston.getCurrentFloor() && piston.getCurrentFloor() != piston.getDestinationFloor()){
+ 				piston.setDestinationFloor(queue.peek().getFloorNumber());
+ 				System.out.println("Floor obj: "+queue.peek().getFloorNumber());
+ 				System.out.println("Piston Floor: "+ piston.getCurrentFloor());
+ 				
+ 				if(piston.getDestinationFloor() == piston.getCurrentFloor()){
+ 					cp.flOff(piston.getDestinationFloor()-1);
+ 					queue.remove(queue.peek());
+ 					//Thread.sleep(5000);
+ 					//fp.panel_off(int f);
+ 					//this.door_function();
+ 					piston.setDestinationFloor(previous);
+ 				}
  		}
- 		piston.piston_main();
- 		if(piston.getCurrentPosition() == piston.getFloorPosition()){
- 			//car_panel.remove(0);
- 		}
+ 		
  	}
+ 		piston.piston_main();
+ 		//System.out.println("Check1");
+ 		//if(piston.getCurrentFloor() == piston.getDestinationFloor()){
+ 			//System.out.println("Check2");
+					//cp.flOff(piston.getDestinationFloor()-1);
+					//this.door_function();
+		//}
+ 	}
+ 	
 	
  	
  	
@@ -128,12 +175,77 @@ public class ControlSystem {
 		floor_buttons = cp.getButtonsPressed();
 		
 		for(int i = 0; i < NUMBER_OF_FLOORS; i++){
-			if(floor_buttons[i] == true) {
-				queue.add(floor[i]);
+			if(floor_buttons[i] == true){
+				//queue.add(floor[i]);
 				car_panel.add(floor[i].getFloorNumber());
+				
+				floor_buttons[i]=false;
 				cp.flOn(i);
 			}
+			//System.out.println(car_panel.get(i));
 		}
+		
+		boolean floor_calls[] = new boolean[8]; 
+		floor_calls = fp.getFloorStatus();
+		
+			
+		//Floor 1 Up call
+		if(floor_calls[0] == true){
+			Floor c = floor[0];
+			//c.changeState(FloorPanelState.UP);
+			queue.add(c);
+			floor_calls[0] = false;
+		}
+		//Floor 2 up call
+		if(floor_calls[1] == true){
+			Floor c = floor[1];
+			//c.changeState(FloorPanelState.UP);
+			queue.add(c);
+			floor_calls[1] = false;
+		}
+		//Floor 2 down call
+		if(floor_calls[2] == true){
+			Floor c = floor[1];
+			//c.changeState(FloorPanelState.DOWN);
+			queue.add(c);
+			floor_calls[2] = false;
+		}
+		//Floor 3 up call
+		if(floor_calls[3] == true){
+			Floor c = floor[2];
+			//c.changeState(FloorPanelState.UP);
+			queue.add(c);
+			floor_calls[3] = false;
+		}
+		//Floor 3 down call
+		if(floor_calls[4] == true){
+			Floor c = floor[2];
+			//c.changeState(FloorPanelState.DOWN);
+			queue.add(c);
+			floor_calls[4] = false;
+		}
+		//Floor 4 up call
+		if(floor_calls[5] == true){
+			Floor c = floor[3];
+			//c.changeState(FloorPanelState.UP);
+			queue.add(c);
+			floor_calls[5] = false;
+		}
+		//Floor 4 down call
+		if(floor_calls[6] == true){
+			Floor c = floor[3];
+			//c.changeState(FloorPanelState.DOWN);
+			queue.add(c);
+			floor_calls[6] = false;
+		}
+		//Floor 5 down call
+		if(floor_calls[7] == true){
+			Floor c = floor[4];
+			//c.changeState(FloorPanelState.DOWN);
+			queue.add(c);
+			floor_calls[7] = false;
+		}
+			
 	}
 	
 	public void CarPanelInput(){
@@ -229,33 +341,77 @@ public class ControlSystem {
 		this.FireAlarmCheck();
 	}
 	
-	public class ElevatorQueue implements Comparator<Floor> {
+	public class ElevatorQueue extends Floor implements Comparator<Floor> {
 		//May have to add function to check postion of floors compared to each other
+		public boolean equals(Object obj){
+			System.out.println("check");
+			if(obj instanceof Floor){
+				Floor c = (Floor) obj;
+				//for(int i = 0; i<5;i++){
+					//if(obj.floorPosition == floor[i].floorPosition && floor[i].returnPanelStatus() == obj.returnPanelStatus()){
+						return getFloorPanelState() == c.getFloorPanelState() && c.getFloorNumber() == getFloorNumber();
+					//}
+				//}
+			}
+			
+			return false;
+		}
 		
 		public int compare(Floor obj1, Floor obj2){
 			if(piston.getPistonState() == Piston.MOVING_UP){
 				if(obj1.getFloorPanelState() > obj2.getFloorPanelState())
-					return 1;
+					return 1; //1
 				if(obj1.getFloorPanelState() < obj2.getFloorPanelState())  
-					return -1;
+					return -1; //-1
 				if(obj1.floorPosition < obj2.floorPosition && obj1.returnPanelStatus() == FloorPanelState.UP && obj1.floorPosition > piston.getCurrentPosition())
-					return 1;
+					return 1; //1
 				else if(obj2.returnPanelStatus() == FloorPanelState.UP && obj2.floorPosition > piston.getCurrentPosition())
-					return -1;
+					return -1; //-1
 			
 			}
 			if(piston.getPistonState() == Piston.MOVING_DOWN){
 				if(obj1.getFloorPanelState() < obj2.getFloorPanelState())
-					return 1;
+					return 1;//1
 				if(obj1.getFloorPanelState() > obj2.getFloorPanelState())
-					return -1;
+					return -1;//-1
 				if(obj1.floorPosition > obj2.floorPosition && obj1.returnPanelStatus() == FloorPanelState.DOWN && obj1.floorPosition < piston.getCurrentPosition())
-					return 1;
+					return 1;//1
 				else if(obj2.returnPanelStatus() == FloorPanelState.DOWN && obj2.floorPosition < piston.getCurrentPosition())
-					return -1;
+					return -1;//-1
 			}
 			if(piston.getPistonState() == Piston.STATIONARY)
 				return 1;
+			return 0;
+		}
+		
+		public int compareTo(Object obj2){
+			if(obj2 instanceof Floor){
+				Floor c = (Floor) obj2;
+				if(piston.getPistonState() == Piston.MOVING_UP){
+					if(this.getFloorPanelState() > c.getFloorPanelState())
+						return 1; //1
+					if(this.getFloorPanelState() < c.getFloorPanelState())  
+						return -1; //-1
+					if(this.floorPosition < c.floorPosition && this.returnPanelStatus() == FloorPanelState.UP && this.floorPosition > piston.getCurrentPosition())
+						return 1; //1
+					else if(c.returnPanelStatus() == FloorPanelState.UP && c.floorPosition > piston.getCurrentPosition())
+						return -1; //-1
+				
+				}
+				if(piston.getPistonState() == Piston.MOVING_DOWN){
+					if(this.getFloorPanelState() < c.getFloorPanelState())
+						return 1;//1
+					if(this.getFloorPanelState() > c.getFloorPanelState())
+						return -1;//-1
+					if(this.floorPosition > c.floorPosition && this.returnPanelStatus() == FloorPanelState.DOWN && this.floorPosition < piston.getCurrentPosition())
+						return 1;//1
+					else if(c.returnPanelStatus() == FloorPanelState.DOWN && c.floorPosition < piston.getCurrentPosition())
+						return -1;//-1
+				}
+				if(piston.getPistonState() == Piston.STATIONARY)
+					return 1;
+				return 0;
+			}
 			return 0;
 		}
 	}

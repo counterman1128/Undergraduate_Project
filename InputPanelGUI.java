@@ -1,19 +1,35 @@
-package Undergraduate_Project;
+package elevator_project;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.TextArea;
+import javax.swing.JFormattedTextField;
+import java.awt.Dimension;
+import java.awt.Component;
+import javax.swing.SwingConstants;
+import java.awt.event.KeyEvent;
 
 public class InputPanelGUI extends JPanel {
+
+	private int 	inputSpeed				= 0;
+	private int 	inputWeight 			= 0;
+	private int 	inputPosition 			= 0;
+	private boolean inputMaintenanceMode 	= false;
+	private boolean inputFire				= false;
+	private boolean inputDoorObstruction 	= false;
+	
+	TextArea errorMessage = new TextArea();
 
 	private JLabel title;
 	
@@ -41,101 +57,163 @@ public class InputPanelGUI extends JPanel {
 	private JButton ob_true;
 	private JButton ob_false;
 	
-	private double speedinp;
-	private double posinp;
-	private double weightinp;
-	private boolean maint_status;
-	private boolean smoke_status;
-	private boolean obstru_status;
+	private JButton btnClear;
 	
 	public InputPanelGUI() {
 		
 		title = new JLabel();
+		title.setHorizontalTextPosition(SwingConstants.CENTER);
+		title.setDisplayedMnemonic(KeyEvent.VK_KP_DOWN);
+		title.setAlignmentY(0.0f);
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setForeground(Color.DARK_GRAY);
 		
 		
 		chSpeed = new JLabel();
+		chSpeed.setHorizontalAlignment(SwingConstants.CENTER);
 		speedInput = new JTextField();
+		speedInput.setMaximumSize(new Dimension(5, 1));
 		spdSubmit = new JButton();
+		spdSubmit.setAlignmentX(Component.CENTER_ALIGNMENT);
 		spdSubmit.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				speedinp = Double.parseDouble(getSpeed());
-				System.out.print(speedinp);
-			}
-		});
+			public void mouseClicked(MouseEvent e) {
+				String speedText = speedInput.getText();
+				try {
+					inputSpeed = Integer.parseUnsignedInt(speedText);
+					
+					errorMessage.append("[+] New speed: " + inputSpeed + "\n");
 
-		chPos = new JLabel();
-		posInput = new JTextField();
-		posSubmit = new JButton();
-		posSubmit.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				posinp = Double.parseDouble(getPos());
-				if(posinp < 0 && posinp > 50) {
-					System.out.println("Please enter an integer between 0 and 50");
-				}				
-			}
-		});
-
-		setFire = new JLabel();
-		f_true = new JButton();
-		f_true.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				smoke_status = true;
-			}
-		});
-		f_false = new JButton();
-		f_false.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				smoke_status = false;
-			}
-		});
-
-		maint = new JLabel();
-		m_true = new JButton();
-		m_true.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				maint_status = true;
-			}
-		});
-		m_false = new JButton();
-		m_false.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				maint_status = false;
+				} catch (NumberFormatException s) {
+					errorMessage.append("[-] Invalid entry: " + speedText + "\n");
+				}
 			}
 		});
 
 		weight = new JLabel();
+		weight.setHorizontalAlignment(SwingConstants.CENTER);
 		weightInput = new JTextField();
+		weightInput.setMaximumSize(new Dimension(5, 1));
 		weightSubmit = new JButton();
 		weightSubmit.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				weightinp = Double.parseDouble(getWeight());
-				System.out.println(weightinp);
+			public void mouseClicked(MouseEvent e) {
+				String weightText = weightInput.getText();
+				try {
+					inputWeight = Integer.parseUnsignedInt(weightText);
+					errorMessage.append("[+] New weight: " + inputWeight + "\n");
+				} catch (NumberFormatException s) {
+					errorMessage.append("[-] Invalid weight: " + weightText + "\n");
+				}
+			}
+		});
+		
+		chPos = new JLabel();
+		chPos.setHorizontalAlignment(SwingConstants.CENTER);
+		posInput = new JTextField();
+		posInput.setMaximumSize(new Dimension(5, 1));
+		posSubmit = new JButton();
+		posSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String posText = posInput.getText();		
+				try {
+					inputPosition = Integer.parseUnsignedInt(posText);
+					errorMessage.append("[+] New position: " + inputPosition + "\n");
+				} catch (NumberFormatException s) {
+					errorMessage.append("[-] Invalid position: " + posText + "\n");
+				}
+			}
+		});
+
+		setFire = new JLabel();
+		setFire.setHorizontalAlignment(SwingConstants.CENTER);
+		f_true = new JButton();
+		f_true.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				inputFire = true;
+				f_true.setForeground(Color.RED);
+				f_false.setForeground(Color.BLACK);
+				errorMessage.append("[+] Fire: " + inputFire + "\n");
+			}
+		});
+		
+		f_false = new JButton();
+		f_false.setForeground(Color.RED);
+		f_false.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				inputFire = false;
+				f_false.setForeground(Color.RED);
+				f_true.setForeground(Color.BLACK);
+				errorMessage.append("[+] Fire: " + inputFire + "\n");
+			}
+		});
+
+		maint = new JLabel();
+		maint.setHorizontalAlignment(SwingConstants.CENTER);
+		m_true = new JButton();
+		m_true.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				inputMaintenanceMode = true;
+				m_true.setForeground(Color.RED);
+				m_false.setForeground(Color.BLACK);
+				errorMessage.append("[+] Maintenance: " + inputMaintenanceMode + "\n");
+
+			}
+		});
+		
+		m_false = new JButton();
+		m_false.setForeground(Color.RED);
+		m_false.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				inputMaintenanceMode = false;
+				m_false.setForeground(Color.RED);
+				m_true.setForeground(Color.BLACK);
+				errorMessage.append("[+] Maintenance: " + inputMaintenanceMode + "\n");
 			}
 		});
 
 		obstruct = new JLabel();
+		obstruct.setHorizontalAlignment(SwingConstants.CENTER);
+		obstruct.setBackground(Color.LIGHT_GRAY);
 		ob_true = new JButton();
+		ob_true.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		ob_true.setBackground(Color.LIGHT_GRAY);
 		ob_true.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				obstru_status = true;
-			}
-		});
-		ob_false = new JButton();
-		ob_false.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				obstru_status = false;
+				inputDoorObstruction = true;
+				ob_true.setForeground(Color.RED);
+				ob_false.setForeground(Color.BLACK);
+				errorMessage.append("[+] Obtruction: " + inputDoorObstruction + "\n");
+
 			}
 		});
 		
+		ob_false = new JButton();
+		ob_false.setForeground(Color.RED);
+		ob_false.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				inputDoorObstruction = false;
+				ob_false.setForeground(Color.RED);
+				ob_true.setForeground(Color.BLACK);
+				errorMessage.append("[+] Obtruction: " + inputDoorObstruction + "\n");
+			}
+		});
+		
+		btnClear = new JButton("Clear");
+		btnClear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				errorMessage.setText("");
+			}
+		});
+				
 		setUpInputPanel();
 	}
 	
@@ -146,126 +224,108 @@ public class InputPanelGUI extends JPanel {
 		setLayout(null);
 		
 		this.add(title);
-		title.setBounds(31, 12, 155, 64);
-		title.setText("Test Input");
-		title.setFont(new Font("Serif", Font.PLAIN, 36));
+		title.setBounds(15, 10, 200, 60);
+		title.setText("Control Panel");
+		title.setFont(new Font("Serif", Font.PLAIN, 30));
 	
 		this.add(chSpeed);
-		chSpeed.setBounds(12, 89, 196, 22);
-		chSpeed.setText("Change Speed (ft/s) :");
+		chSpeed.setBounds(15, 70, 200, 20);
+		chSpeed.setText("New Speed (ft/s) :");
 		this.add(speedInput);
-		speedInput.setLocation(22, 124);
+		speedInput.setLocation(21, 100);
 		speedInput.setSize(69, 20);
 		this.add(spdSubmit);
-		spdSubmit.setLocation(103, 124);
+		spdSubmit.setLocation(102, 100);
 		spdSubmit.setSize(81, 20);
 		spdSubmit.setText("Submit");
 		
 		this.add(chPos);
-		chPos.setBounds(12, 262, 196, 22);
-		chPos.setText("Change Position (ft) :");
+		chPos.setBounds(14, 210, 200, 22);
+		chPos.setText("New Elevator Position (ft)");
 		this.add(posInput);
-		posInput.setLocation(22,287);
+		posInput.setLocation(21,240);
 		posInput.setSize(69,20);
 		this.add(posSubmit);
-		posSubmit.setLocation(103,287);
+		posSubmit.setLocation(102,240);
 		posSubmit.setSize(81,20);
 		posSubmit.setText("Submit");
 
 		this.add(setFire);
-		setFire.setBounds(12,442, 196,22);
+		setFire.setBounds(14,350, 196,22);
 		setFire.setText("Create Smoke/Fire?");
 		this.add(f_true);
-		f_true.setLocation(22,472);
+		f_true.setLocation(21,380);
 		f_true.setSize(69,20);
 		f_true.setText("Yes");
 		this.add(f_false);
-		f_false.setLocation(115,472);
+		f_false.setLocation(114,380);
 		f_false.setSize(69,20);
 		f_false.setText("No");
 		
 		this.add(maint);
-		maint.setBounds(12, 369, 196, 22);
-		maint.setText("Turn on Maintenance Mode?");
+		maint.setBounds(14, 280, 200, 22);
+		maint.setText("Maintenance Mode On?");
 		this.add(m_true);
 		m_true.setSize(69,20);
-		m_true.setLocation(22,399);
+		m_true.setLocation(21,310);
 		m_true.setText("Yes");
 		this.add(m_false);
 		m_false.setSize(69,20);
-		m_false.setLocation(115,399);
+		m_false.setLocation(114,310);
 		m_false.setText("No");
 		
 		this.add(weight);
-		weight.setBounds(12, 183, 196, 22);
-		weight.setText("Change the current weight (lbs) :");
+		weight.setBounds(14, 140, 200, 22);
+		weight.setText("New weight (lbs) :");
 		this.add(weightInput);
 		weightInput.setSize(69,20);
-		weightInput.setLocation(22,209);
+		weightInput.setLocation(23,170);
 		this.add(weightSubmit);
 		weightSubmit.setSize(81,20);
-		weightSubmit.setLocation(103,209);
+		weightSubmit.setLocation(104,170);
 		weightSubmit.setText("Submit");
 		
 		this.add(obstruct);
-		obstruct.setBounds(12, 524, 196, 22);
+		obstruct.setBounds(14, 420, 200, 20);
 		obstruct.setText("Create a door obstruction?");
 		this.add(ob_true);
 		ob_true.setSize(69,20);
-		ob_true.setLocation(22,558);
+		ob_true.setLocation(21,450);
 		ob_true.setText("Yes");
 		this.add(ob_false);
 		ob_false.setSize(69,20);
-		ob_false.setLocation(115,558);
+		ob_false.setLocation(114,450);
 		ob_false.setText("No");
+		
+		errorMessage.setBounds(15, 490, 170, 170);
+		this.add(errorMessage);
+		
+		btnClear.setBounds(44, 660, 117, 29);
+		this.add(btnClear);
 	}
 	
-	/**
-	 * Private accessors for this class only
-	 */
-	// returns the speed from the text field
-	private String getSpeed() {
-		return speedInput.getText();
+	// returns the new speed of the car as set by the text box
+	public int getSpeed() {
+		return inputSpeed;
 	}
 	// returns the weight from the text field
-	private String getWeight() {
-		return weightInput.getText();
+	public int getWeight() {
+		return inputWeight;
 	}
 	// returns the position from the text box
-	private String getPos() {
-		return posInput.getText();
+	public int getPos() {
+		return inputPosition;
 	}	
 	
-	/**
-	 * Accessors to be used by MainDisplay 
-	 */
-	// returns the value of the speed input
-	public double speedNum() {
-		return speedinp;
+	public boolean getMaintenanceMode() {
+		return inputMaintenanceMode;
 	}
 	
-	// returns the value of the weight input
-	public double weightNum() {
-		return weightinp;
+	public boolean getFire() {
+		return inputFire;
 	}
 	
-	// returns the value of the position input
-	public double posNum() {
-		return posinp;
-	}
-	
-	// returns the status of the smoke/fire alarm
-	public boolean smokeStat() {
-		return smoke_status;
-	}
-	
-	// returns the status of maintenance mode
-	public boolean maintStat() {
-		return maint_status;
-	}
-	
-	// returns whether there is an obstruction or not
-	public boolean obstruStat() {
-		return obstru_status;
+	public boolean getDoorObstruction() {
+		return inputDoorObstruction;
 	}
 }

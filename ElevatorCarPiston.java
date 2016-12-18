@@ -4,16 +4,17 @@ public class ElevatorCarPiston {
 	private int currentFloor;
 	private int lastFloor;
 	private int destinationFloor;
+	public int[] path = new int[5];
 	
 	//General object for piston
 	public Object piston = new Object();
 	//Time variables for pistonMove()
 	public long begin_time = System.nanoTime();
-	public double up_time = 0;
-	public double down_time = 0;
+	public double up_time = 0.0;
+	public double down_time = 0.0;
 	//Position variable for pistonMove()
-	public double floorPosition = destinationFloor * 10 - 10;
-	public double currentPosition = 0;
+	public double floorPosition = destinationFloor * 10.0;
+	public double currentPosition = 0.0;
 	
 	//Speed of elevator system
 	public double elevator_speed = 2.0;
@@ -39,7 +40,40 @@ public class ElevatorCarPiston {
 	
 	// Accessor
 	public int getCurrentFloor() {
+		/*currentFloor = (int)(this.getCurrentPosition()/10.0) + 1;
 		return currentFloor;
+		*/
+		double value = 1.6;
+		double x = this.getCurrentPosition();
+		if(x == 0){
+			return 1;
+		}
+		if(x == value*6.25){
+			return 2;
+		}
+		if(x == value*12.5){
+			return 3;
+		}
+		if(x == value*18.75){
+			return 4;
+		}
+		if(x == value*25){
+			return 5;
+		}
+		return 0;
+	}
+	
+	public int c_display() {
+		currentFloor = (int)(this.getCurrentPosition()/10.0) + 1;
+		return currentFloor;
+	}
+	
+	public double path_pos(int i){
+		return path[i] *10;
+	}
+	
+	public int[] array(){
+		return path;
 	}
 	
 	public int getDestinationFloor() {
@@ -60,7 +94,9 @@ public class ElevatorCarPiston {
 	}
 	
 	public void setDestinationFloor(int floor) {
-		destinationFloor = floor;
+		destinationFloor = floor+1;
+		//System.out.println("Destination Floor: "+destinationFloor);
+		floorPosition = destinationFloor *10.0 - 10;
 	}
 	
 	public int movePistonToDestinationFloor() {
@@ -113,30 +149,44 @@ public class ElevatorCarPiston {
 		return elevator_speed;	
 	}
 	
-	public void piston_main(){
-		if(currentPosition < floorPosition)
+	public void piston_main() throws InterruptedException{
+		if(currentPosition < floorPosition){
 			piston = object.MOVING_UP;
-		else if(currentPosition > floorPosition)
+			//System.out.println("Set to up");
+			//Thread.sleep(1000);
+			up_time = time_sec();
+			down_time = time_sec();
+			this.pistonMove();
+			//System.out.println("Position: "+currentPosition);
+		}
+			
+		else if(currentPosition > floorPosition){
 			piston = object.MOVING_DOWN;
-		else
+			//Thread.sleep(1000);
+			up_time = time_sec();
+			down_time = time_sec();
+			this.pistonMove();
+		}
+		else{
 			piston = object.STATIONARY;
-		while(currentPosition != floorPosition){
-			this.pistonMove();	
 		}
 	}
 	
 	//Calculates the position of the Piston with respect to time and speed
-	public double pistonMove(){	
+	public double pistonMove() throws InterruptedException{
+		Thread.sleep(1000);
 		if(piston == object.MOVING_UP){
+			//System.out.println("moving up");
 			up_time = time_sec();
+			//up_time++
+			//System.out.println(time_sec());
 			currentPosition = currentPosition + elevator_speed * Math.abs((up_time - down_time));
 		}else if(piston == object.MOVING_DOWN){
 			down_time = time_sec();
 			currentPosition = currentPosition - elevator_speed * Math.abs((up_time - down_time));
 		}else{
-			/*
-			 * May need to add functions if piston stationary state breaks calculations
-			 */
+			up_time = time_sec();
+			down_time = time_sec();
 		}
 		return currentPosition;
 	}

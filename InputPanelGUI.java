@@ -1,4 +1,4 @@
-package elevator_project;
+package Undergraduate_Project;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -28,6 +28,8 @@ public class InputPanelGUI extends JPanel {
 	private boolean inputMaintenanceMode 	= false;
 	private boolean inputFire				= false;
 	private boolean inputDoorObstruction 	= false;
+	private boolean iSpeed = false;
+	private boolean iPos = false;
 	
 	TextArea errorMessage = new TextArea();
 
@@ -81,7 +83,7 @@ public class InputPanelGUI extends JPanel {
 				String speedText = speedInput.getText();
 				try {
 					inputSpeed = Integer.parseUnsignedInt(speedText);
-					
+					iSpeed = true;
 					errorMessage.append("[+] New speed: " + inputSpeed + "\n");
 
 				} catch (NumberFormatException s) {
@@ -119,6 +121,7 @@ public class InputPanelGUI extends JPanel {
 				String posText = posInput.getText();		
 				try {
 					inputPosition = Integer.parseUnsignedInt(posText);
+					iPos = true;
 					errorMessage.append("[+] New position: " + inputPosition + "\n");
 				} catch (NumberFormatException s) {
 					errorMessage.append("[-] Invalid position: " + posText + "\n");
@@ -224,7 +227,7 @@ public class InputPanelGUI extends JPanel {
 		setLayout(null);
 		
 		this.add(title);
-		title.setBounds(15, 10, 200, 60);
+		title.setBounds(1, 10, 200, 60);
 		title.setText("Control Panel");
 		title.setFont(new Font("Serif", Font.PLAIN, 30));
 	
@@ -327,5 +330,21 @@ public class InputPanelGUI extends JPanel {
 	
 	public boolean getDoorObstruction() {
 		return inputDoorObstruction;
+	}
+	
+	public boolean getiSpeed() {
+		return iSpeed;
+	}
+	
+	public void setiSpeed(boolean s) {
+		iSpeed = s;
+	}
+	
+	public boolean getiPos() {
+		return iPos;
+	}
+	
+	public void setiPos(boolean s) {
+		iPos = s;
 	}
 }

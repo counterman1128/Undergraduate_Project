@@ -5,9 +5,9 @@ import Undergraduate_Project.Door;
 
 
 public class Floor {
-	private int 		floorNumber;
+	public int 		floorNumber;
 	private Display 	floorDisplay;
-	private FloorPanel 	floorPanel;
+	public FloorPanel 	floorPanel;
 	private Door 		floorDoor;
 
 	public double floorPosition;
@@ -45,6 +45,17 @@ public class Floor {
 
 	public Door getFloorDoor() {
 		return floorDoor;
+	}
+	
+	public void changeState(FloorPanelState x){
+		/*if(x == 1){
+			floorPanel.setUpButtonPressed(true);
+		}else if(x == -1){
+			floorPanel.setUpButtonPressed(false);
+		}else if(x == 0){
+			
+		}*/
+		panel = x;
 	}
 	
 	public int getFloorPanelState(){
